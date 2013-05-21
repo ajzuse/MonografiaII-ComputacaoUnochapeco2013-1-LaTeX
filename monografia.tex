@@ -1,0 +1,86 @@
+% Monografia-LaTeX (Unochapecó)                                           %
+% Copyright (C) 2013  Daniel Girotto                                      %
+%                                                                         %
+% This program is free software: you can redistribute it and/or modify    %
+% it under the terms of the GNU General Public License as published by    %
+% the Free Software Foundation, either version 3 of the License, or       %
+% (at your option) any later version.                                     %
+%                                                                         %
+% This program is distributed in the hope that it will be useful,         %
+% but WITHOUT ANY WARRANTY; without even the implied warranty of          %
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           %
+% GNU General Public License for more details.                            %
+%                                                                         %
+% You should have received a copy of the GNU General Public License       %
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.   %
+
+% ------------------------------------------------------------ %
+% Monografia                                                   %
+% ------------------------------------------------------------ %
+\documentclass[pnumromarab, normaltoc, a4paper, 12pt]{abnt-unochapeco}
+
+\usepackage{url}
+\usepackage{leading}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage[abnt-emphasize=bf]{abnt-alf}
+\usepackage{varwidth}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+
+\begin{document}
+
+\newcommand{\area}{área de ciências exatas e ambientais}
+\newcommand{\curso}{ciência da computação}
+\newcommand{\grau}{bacharelado}
+\newcommand{\grautitulo}{bacharel}
+\newcommand{\supervisortcc}{Prof. Sandro de Oliveira, Esp.,MSc., Dr.}
+\newcommand{\coordenador}{Prof. Viviane Duarte Bonfim, Esp.,MSc., Dr.}
+\newcommand{\membrobancaa}{Prof. Marcos Antonio Moretto, Esp.,MSc., Dr.}
+\newcommand{\membrobancab}{Prof. Jean Carlos Hennrichs, Esp.,MSc., Dr.}
+\newcommand{\datadefesa}{Dia de Julho de 2013}
+
+\renewcommand{\autor}{Andrei Jiácomo Zuse}
+\renewcommand{\instituicao}{universidade comunitária da região de chapecó}
+\renewcommand{\titulo}{Aplicativo Móvel para o Sistema Acadêmico Minha Uno}
+\renewcommand{\local}{Chapecó}
+\renewcommand{\data}{Julho de 2013}
+\renewcommand{\comentario}{Relatório do Trabalho de Conclusão de Curso submetido
+  à Universidade \mbox{Comunitária} da Região de Chapecó para obtenção do título
+  de bacharelado no curso de Ciência da Computação.}
+\renewcommand{\orientador}{Prof. Marcelo Cezar Pinto, Me.}
+
+
+\capa
+\folhaderosto
+\folhadeaprovacao
+
+\include{pre_textual/dedicatoria}
+\include{pre_textual/agradecimento}
+\include{pre_textual/epigrafe}
+\include{pre_textual/resumo}
+\include{pre_textual/abstract}
+
+\addcontentsline{toc}{chapter}{LISTA DE SIGLAS}
+\listadesiglas
+
+\addcontentsline{toc}{chapter}{LISTA DE FIGURAS}
+\listoffigures
+
+\addcontentsline{toc}{chapter}{LISTA DE TABELAS}
+\listoftables
+
+% ------------------------------------------------------------ %
+% Altera o título do Sumário                                   %
+% ------------------------------------------------------------ %
+\renewcommand{\contentsname}%
+  {\vspace*{.8cm}
+  \normalsize{\bfseries\MakeUppercase{sumário}}%
+  \vspace{1.4cm}}
+
+\sumario
+
+
+
+\end{document}
