@@ -2169,10 +2169,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
     \vspace{-1cm}
     \hspace*{-1.5cm}
     \assinatura*{\orientador \\ \textbf{Orientador}}
-    \ABNTifnotempty{\ABNTcoorientadordata}
-      {
-        \assinatura*{\coorientador \\ \textbf{Co-Orientador}}
-      }
+    \assinatura*{\coorientador \\ \textbf{Co-Orientador}}
   \end{center}
 
   \vfil
