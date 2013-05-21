@@ -1,0 +1,76 @@
+\chapter{Revisão Bibliográfica}
+
+\section{Tecnologias}
+
+\subsection{Sistema Operacional para Dispositivos Móveis}
+Sistemas operacionais para dispositivos móveis seguem o mesmo conceito aplicado a outras plataformas, que segundo Tanembaum, é de difícil definição por meio de um único conceito, pois o mesmo é responsável pelo Gerenciamento do Hardware hospedeiro do mesmo, como também fornecer um conjunto de recursos abstratos claros em vez de recursos confusos de hardware aos aplicativos \cite{tanenbaum2010modern}. Em outras palavras, pode-se dizer que o sistema operacional é formado de um conjunto de softwares e bibliotecas que tornam mais fácil a interação entre a máquina e os usuários.
+
+\subsubsection{Symbian}
+Desenvolvido pela parceria entre Nokia, Ericsson, Motorola e PSION, foi usado amplamente pela Nokia em praticamente todos os seus dispositivos no passado. O sistema operacional tinha como foco a integridade e segurança de dados, evitar desperdício de tempo do usuário e trabalhar com recursos escassos. Era reconhecido pelo gerenciamento extremamente eficiente de recursos como bateria, processador e memória\cite{SistemasOperacionaisMoveisComputacao}.
+
+\subsubsection{iOS}
+Desenvolvido pela Apple, tendo como base o sistema operacional Mac OS X, o iOS inicialmente foi desenvolvido para iPhone, depois expandido para outros produtos como iPad e iPod. É o único sistema operacional analisado desenvolvido para dispositivos específicos, sendo totalmente fechado aos mesmos. Apresenta um ótimo desempenho devido a integração entre Hardware e Software, além da interface gráfica intuitiva, porém apresenta dificuldades para interagir com outros dispositivos externos (como por exemplo outros celulares utilizando a tecnologia Bluetooth) \cite{AvaliacaoComparativaSOMoveis}.
+
+\subsubsection{Google Android}
+O Google Android surgiu da necessidades de várias empresas fabricantes de Hardware, Software e Operadoras de Telefonia Móvel de um sistema operacional que apresentasse vantagens para os desenvolvedores de Software e uma experiência de usuário inovadora, com muitos recursos sem abrir mão da beleza e da facilidade de uso. Desenvolvido pela Open Handset Alliance \cite{OHA}, o Google Android é um sistema operacional desenvolvido sobre o kernel Linux com aplicações nativas e a possibilidade desenvolvimento de aplicações por qualquer pessoa que possua as habilidades e vontade para isso \cite{lechetagoogle}.
+
+\subsubsection{Windows Phone}
+Lançado pela Microsoft em 2010, como sucessor do Windows Mobile, o Windows Phone foi desenvolvido para atender tanto usuários comuns como corporativos. O Windows Phone foi desenvolvido para rodar em diversos hardwares, podendo ser licenciado pelas fabricantes que desejarem usar o mesmo em seus dispositivos. Possui integração total com o ambiente .NET também da Microsoft, além das tecnologias de desenvolvimento Silverlight e XNA. Apresenta uma desvantagem em relação aos outros sistemas operacionais que é não possuir multithread, permitindo que apenas uma aplicação seja executada por vez no dispositivo \cite{AvaliacaoComparativaSOMoveis}.
+
+\subsection{Web service}
+Web service é um sistema de software que permite a comunicação entre diversos softwares por meio de mensagens SOAP, normalmente utilizando o Protocolo de transferência de Hipertexto (HTTP) para transmitir arquivos XML entre as aplicações \cite{W3C}.
+\subsubsection{XML}
+Segundo a  W3C (2012), a Linguagem Extensível de Marcação(XML) é uma linguagem de marcação baseada em texto para representar estruturas de informação. Foi derivada de um padrão antigo chamado \emph{Standard Generalized Markup Language} (SGML), tornando-o mais apropriado para a Web.
+
+O XML apresenta muitas vantagens sobre outros formatos, sendo que cada tag é definida conforme a necessidade da aplicação. Devido a cada tag poder assumir qualquer nome, o documento se torna auto-descritivo, possibilitando a interpretação do documento sem a necessidade de manuais \cite{W3C}.
+
+\section{Ferramentas de Desenvolvimento Multiplataforma para Dispositivos Móveis}
+Um dos grandes desafios para os desenvolvedores de software é encontrar qual ferramenta atende as necessidades da aplicação a ser desenvolvida. Isso fica ainda mais perceptível quando a aplicação deve ser executada em dispositivos móveis, devido a diversidade de sistemas operacionais a serem atendidos. Hoje existem 4 sistemas operacionais para dispositivos móveis que detém grande parte do mercado, sendo eles Android, iOS, Windows Phone e Symbian, sendo o Android e o iOS detentores da maior fatia do mercado. Ao se deparar com este cenário, desenvolvedores se perguntam qual tipo de ferramenta permite que eles desenvolvam apenas uma vez a aplicação, e que a mesma rode de forma satisfatória em todos os dispositivos. Abaixo será visto as 3 principais técnicas de desenvolvimento multiplataforma para dispositivos móveis\cite{CrossPlatformMobileDevelopment2011}.
+
+\subsection{Compilação Cruzada}
+Ferramentas do tipo Compilação Cruzada separam os ambientes de compilação conforme a plataforma de destino, gerando código fonte nativo para a plataforma de destino neste momento do processo de geração de um aplicativo. Com isso são geradas aplicações que são nativas para as plataformas alvo. Este tipo de ferramenta possui a desvantagem de consumir mais tempo durante a compilação, devido a conversão de código, e por apresentar certa demora para aderir a novas plataformas
+\cite{CrossPlatformMobileDevelopment2011}.
+
+\subsubsection{Titanium}
+Desenvolvido pela Appcelerator, o Titanium foi lançado em dezembro de 2008. Baseado na técnica de compilação cruzada, o desenvolvedor utiliza-se de uma API JavaScript para o desenvolvimento da aplicação, e no momento da compilação são gerados códigos nativos para a diferentes plataformas. A compilação é composta por 3 etapas, sendo elas: Pré compilação (Otimização do código JavaScript), Compilação de Front-End (Geração de código nativo da plataforma alvo) e Compilação e Empacotamento para a plataforma (Geração do aplicativo). A diferença entre o Titanium e os outros frameworks descritos abaixo é a geração de interfaces que não utilizam de um motor de navegação, mas que são nativas, geradas por código nativo resultante da compilação do código JavaScript
+\cite{CrossPlatformMobileDevelopment2011}.
+
+Devido a estas características nativas, que torna difícil e demorado o suporte a novas plataformas, o Titanium suporta no formato de compilação cruzada apenas os sistemas operacionais iOS e Android, além de suportar desenvolvimento baseado em Web utilizando HTML5
+\cite{appceleratorTitanium}.
+
+\subsection{Máquina Virtual}
+Ferramentas do tipo Máquina Virtual ficam entre as ferramentas baseadas em Web e as ferramentas de Compilação Cruzada. Nelas o código-fonte é empacotado juntamente com bibliotecas e uma máquina virtual, que em tempo de execução converte os comandos do código fonte em comandos nativos da plataforma que está executando a aplicação. Sua desvantagem é que normalmente aplicações maiores apresentam um certo delay na sua execução, devido a conversão do código
+\cite{CrossPlatformMobileDevelopment2011}.
+
+\subsubsection{Rhodes}
+Lançado em 2008, o Rhodes é um framework para desenvolvimento que faz parte do ecossistema de ferramentas voltadas para o desenvolvimento multiplataforma. Por se utilizar de uma Máquina virtual para a execução dos programas desenvolvidos, o mesmo converte as aplicações desenvolvidas utilizando Ruby na sua parte lógica, e \emph{HyperText Markup Language} (HTML), JavaScript e \emph{Cascading Style Sheets} (CSS) para a interface gráfica para código nativo da plataforma em que a aplicação está sendo executada, apresentando uma experiência de usuário similar a de aplicações desenvolvidas em código nativo para a plataforma em que a aplicação está sendo executada
+\cite{CrossPlatformMobileDevelopment2011}.
+
+\subsection{Web}
+Ferramentas do tipo Web empacotam código fonte voltado para a internet (normalmente desenvolvidos em HTML e CSS) juntamente com um Webkit, dando a impressão para o usuário que se trata de uma aplicação desenvolvida para aquela plataforma. Possui como principal vantagem o desenvolvimento simplificado porém , por não utilizar componentes gráficos do sistema operacional hospedeiro, apenas simula o comportamento de uma aplicação nativa. Além disso, depende dos recursos fornecidos pelo webkit do sistema operacional para determinar o nível de acesso a funcionalidades do mesmo 
+\cite{CrossPlatformMobileDevelopment2011}.
+
+\subsubsection{PhoneGap}
+Criado no inicio de 2008, o PhoneGap fornece um conjunto de ferramentas para desenvolvimento de aplicações multiplataforma para dispositivos móveis utilizando apenas código HTML, JavaScript e CSS. Muito popular pela sua flexibilidade, arquitetura simples e de fácil utilização. Utilizando um modelo híbrido de execução, um único código-fonte escrito em HTML, JavaScript e CSS são executados em um browser empacotado em forma de aplicação nativa, suportado em cada plataforma de destino. O Acesso as funcionalidades do Sistema Operacional é feito por meio da chamada de métodos JavaScript que fazem as requisições na API proprietária do Sistema Operacional. É uma alternativa para a portabilidade de aplicações Web para dispositivos móveis, mas deve-se lembrar que não se possui acesso aos componentes gráficos nativos do sistema operacional
+\cite{CrossPlatformMobileDevelopment2011}.
+
+\section{Comunicação}
+
+\subsection{Redes Sem Fio}
+As redes sem fio tem como principal característica não haver necessidade de cabos para conectar vários dispositivos. Este tipo de rede apresenta uma complexidade maior comparada com as redes cabeadas, devido a mobilidade dos dispositivos, o que não ocorre com os dispositivos utilizados nas redes com fio, onde a mobilidade máxima é a permitida pelo cabo ao qual o dispositivo está conectado. Além disso, neste tipo de rede podem ocorrer problemas de interferência entre redes que compartilham o mesmo espaço físico 
+\cite{IEEE80211}.
+
+\subsection{Telefonia e Internet Móvel}
+Desde a primeira geração de telefones móveis introduzidas no mundo durante os anos 80 e 90  até a atual tecnologia 4G (LTE) muitas evoluções ocorreram na forma como os celulares se comunicam. A evolução causada por estas tecnologias mudou a forma em que o mundo se comunica, trazendo a possibilidade de conectar-se a internet utilizando um dispositivo móvel onde quer que você esteja, bastando haver sinal da operadora de telefonia.
+
+\subsubsection{1G}
+As redes de 1ª Geração (1G) causaram grande impacto na sociedade pelo seu nível de inovação. Trabalhando de forma analógica utilizando-se de modulação de frequência (do inglês Frequency Modulation - FM), onde se transmitia a voz do usuário em faixas de Frequência Muito Alta (do inglês Ultra High Frequency - UHF) \cite{AEvolucaoTelefoniaCelular}. Este tipo de rede permite apenas o tráfego de voz, onde a qualidade das ligações varia conforme o nível de interferência. Além disso um dos problemas desta tecnologia é a baixa segurança, onde é possível fazer escuta de ligações utilizando-se de sintonizador de rádio e até mesmo utilizar frequências alheias para efetuar ligações  \cite{GeracoesTelefoniaMovel}.
+
+\subsubsection{2G}
+Inserida no mercado no início da década de 90, é marcada pela mudança da tecnologia analógica para a tecnologia digital, permitindo assim além de um maior número de ligações simultâneas na rede, o envio de mensagens de texto (\emph{Short Message Service} (SMS)) e a capacidade de transmitir dados em baixa velocidade entre dispositivos utilizando-se da rede \cite{GeracoesTelefoniaMovel}.
+
+\subsubsection{3G}
+A terceira geração de redes móveis é considerada um avanço nas redes 2G baseadas na família de normas da União Internacional de Telecomunicações. Trouxe as redes maior capacidade e serviços para os usuários, como conexões de dados a longas distancias com velocidades variando entre 5 e 10Mbps \cite{GeracoesTelefoniaMovel}.
+
+\subsubsection{4G}
+Absorvendo todas as características das redes 3G, as redes 4G propõe mais velocidade e uma nova visão de mercado. Este padrão totalmente baseado em endereçamento IP garante velocidades de acesso entre 100Mbps com dispositivos em movimento e 5Gbps para dispositivos em repouso. Como o 4G é totalmente baseado em IP, também torna possível a integração de qualquer dispositivo que utilize desta tecnologia, como web TV's, gadgets. A tecnologia prevê a serviços como envio de Mensagens Multimídia (do inglês \emph{Multimedia Messaging Service} - MMS), Video Chat, TV Móvel, Broadcast de Video Digital além dos serviços básicos como voz e dados. Além disso prevê a a interoperabilidade entre os diversos padrões de rede sem fio \cite{GeracoesTelefoniaMovel}.
