@@ -3,8 +3,8 @@ INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
 INPUT monografia.tex
 OUTPUT monografia.log
-INPUT abnt-unochapeco.cls
-INPUT abnt-unochapeco.cls
+INPUT abnt.cls
+INPUT abnt.cls
 INPUT cvs-id.def
 INPUT cvs-id.def
 INPUT /usr/share/texmf/tex/latex/base/ifthen.sty
@@ -22,10 +22,6 @@ INPUT /usr/share/texmf/fonts/tfm/public/cm/cmr12.tfm
 INPUT /usr/share/texmf/tex/latex/setspace/setspace.sty
 INPUT /usr/share/texmf/tex/latex/setspace/setspace.sty
 INPUT /usr/share/texmf/tex/latex/setspace/setspace.sty
-INPUT /usr/share/texmf/tex/latex/etoolbox/etoolbox.sty
-INPUT /usr/share/texmf/tex/latex/etoolbox/etoolbox.sty
-INPUT /usr/share/texmf/tex/latex/etex-pkg/etex.sty
-INPUT /usr/share/texmf/tex/latex/etex-pkg/etex.sty
 INPUT /usr/share/texmf/tex/latex/tools/indentfirst.sty
 INPUT /usr/share/texmf/tex/latex/tools/indentfirst.sty
 INPUT /usr/share/texmf/tex/latex/url/url.sty
@@ -50,6 +46,12 @@ INPUT /usr/share/texmf/tex/generic/oberdiek/infwarerr.sty
 INPUT /usr/share/texmf/tex/generic/oberdiek/infwarerr.sty
 INPUT /usr/share/texmf/tex/generic/oberdiek/ltxcmds.sty
 INPUT /usr/share/texmf/tex/generic/oberdiek/ltxcmds.sty
+INPUT abnt-unochapeco.sty
+INPUT abnt-unochapeco.sty
+INPUT /usr/share/texmf/tex/latex/etoolbox/etoolbox.sty
+INPUT /usr/share/texmf/tex/latex/etoolbox/etoolbox.sty
+INPUT /usr/share/texmf/tex/latex/etex-pkg/etex.sty
+INPUT /usr/share/texmf/tex/latex/etex-pkg/etex.sty
 INPUT abnt-alf.sty
 INPUT abnt-alf.sty
 INPUT abntcite.sty
@@ -121,6 +123,8 @@ INPUT revisaobibliografica.aux
 INPUT revisaobibliografica.aux
 INPUT minhauno.aux
 INPUT minhauno.aux
+INPUT servidor.aux
+INPUT servidor.aux
 INPUT pesquisa.aux
 INPUT pesquisa.aux
 OUTPUT monografia.aux
@@ -214,7 +218,6 @@ INPUT monografia.toc
 INPUT monografia.toc
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmbx10.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmri12.tfm
-INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmr10.tfm
 OUTPUT monografia.toc
 OUTPUT introducao.aux
 INPUT introducao.tex
@@ -225,6 +228,8 @@ OUTPUT justificativa.aux
 INPUT justificativa.tex
 INPUT justificativa.tex
 OUTPUT objetivos.aux
+INPUT objetivos.tex
+INPUT objetivos.tex
 OUTPUT procedimentosmetodologicos.aux
 INPUT procedimentosmetodologicos.tex
 INPUT procedimentosmetodologicos.tex
@@ -246,6 +251,9 @@ INPUT ./imagens/professor.png
 INPUT imagens/tecnico.png
 INPUT ./imagens/tecnico.png
 INPUT ./imagens/tecnico.png
+OUTPUT servidor.aux
+INPUT servidor.tex
+INPUT servidor.tex
 OUTPUT pesquisa.aux
 INPUT pesquisa.tex
 INPUT pesquisa.tex
@@ -277,6 +285,8 @@ INPUT revisaobibliografica.aux
 INPUT revisaobibliografica.aux
 INPUT minhauno.aux
 INPUT minhauno.aux
+INPUT servidor.aux
+INPUT servidor.aux
 INPUT pesquisa.aux
 INPUT pesquisa.aux
 INPUT /usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc

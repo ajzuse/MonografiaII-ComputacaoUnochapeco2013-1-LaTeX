@@ -1,0 +1,5 @@
+PWD /home/ajzuse/git/MonografiaII-ComputacaoUnochapeco2013-1-LaTeX
+INPUT /etc/texmf/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+INPUT servidor.tex
+OUTPUT servidor.log

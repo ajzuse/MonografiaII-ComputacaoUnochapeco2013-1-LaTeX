@@ -17,12 +17,13 @@
 % ------------------------------------------------------------ %
 % Monografia                                                   %
 % ------------------------------------------------------------ %
-\documentclass[pnumromarab, normaltoc, a4paper, 12pt]{abnt-unochapeco}
+\documentclass[pnumromarab, normaltoc, a4paper, 12pt]{abnt}
 
 \usepackage{url}
 \usepackage{leading}
 \usepackage{lmodern}
 \usepackage{graphicx}
+\usepackage{abnt-unochapeco}
 \usepackage[abnt-emphasize=bf]{abnt-alf}
 \usepackage{varwidth}
 \usepackage[T1]{fontenc}
@@ -50,7 +51,8 @@
   à Universidade \mbox{Comunitária} da Região de Chapecó para obtenção do título
   de bacharelado no curso de Ciência da Computação.}
 \renewcommand{\orientador}{Prof. Marcelo Cezar Pinto, Me.}
-
+\newcommand{\textofolhaaprovacao}{ESTE RELATÓRIO, DO TRABALHO DE CONCLUSÃO
+  DE CURSO, FOI JULGADO ADEQUADO PARA OBTENÇÃO DO TÍTULO DE:}
 \capa
 \folhaderosto
 \folhadeaprovacao
@@ -86,6 +88,7 @@
 \include{procedimentosmetodologicos}
 \include{revisaobibliografica}
 \include{minhauno}
+\include{servidor}
 \include{pesquisa}
 
 \bibliography{bibliografia}

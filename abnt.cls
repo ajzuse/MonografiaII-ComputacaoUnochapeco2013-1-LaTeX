@@ -1,12 +1,20 @@
+%$Id: abnt.cls,v 1.27.2.1 2004/11/02 15:04:29 gweber Exp $
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% ABNT-Unochapeco.CLS
+% ABNT.CLS
 %
 %
 %   Licence: LPPL (LaTeX Project Public License)
 %     You can change this file in the terms of LPPL
 %     (http://www.latex-project.org/lppl.html)
 % 
+%   Licenca: LPPL (LaTeX Project Public License)
+%     Esta licenca diz basicamente que se voce editar o codigo desta
+%     classe, mesmo localmente (no seu micro), voce DEVE RENOMEAR o arquivo
+%     da classe!! Como sempre, nao eh dada nenhuma garantia.
+%     Para o texto completo da licenca, favor seguir o endereco
+%        http://www.latex-project.org/lppl.html
+%
 %   Classe para confeccao de monografias, dissertacoes ou teses
 %   de acordo com as normas da Associacao Brasileira de Normas
 %   Tecnicas (ABNT). Esta classe, junto com o estilo bibTeX, foram
@@ -134,21 +142,21 @@
 % Retirado um bug no \@chapter que causa o cabecalho ter o numero do capitulo errado
 %
 % Revision 1.26  2003/10/13 09:40:01  gweber
-% Passa a usar cvs-id.def para gerar informaï¿½ï¿½es sobre data e versï¿½o.
+% Passa a usar cvs-id.def para gerar informações sobre data e versão.
 %
 % Revision 1.25  2003/09/16 16:49:29  gweber
-% Troca de \bibname por \refname o que equivale a trocar "Referï¿½ncas Bibliogrï¿½ficas" por
-% "Referï¿½ncias". Isto atende ao que entendemos esteja implï¿½cito na NBR14724-2002.
+% Troca de \bibname por \refname o que equivale a trocar "Referêncas Bibliográficas" por
+% "Referências". Isto atende ao que entendemos esteja implícito na NBR14724-2002.
 %
 % Revision 1.24  2003/08/22 14:45:18  gweber
 % Resolvido bug 178 que fazia o texto de \part aparecer duas vezes.
 %
 % Revision 1.23  2003/06/30 14:10:47  gweber
-% Links criados com hyperref para apï¿½ndices e anexos nï¿½o misturam mais com os links para capï¿½tulos comuns,
+% Links criados com hyperref para apêndices e anexos não misturam mais com os links para capítulos comuns,
 % resolvendo o bug #140.
 %
 % Revision 1.22  2003/05/30 10:39:19  gweber
-% Alteraï¿½ï¿½es introduzidas em 0.7-beta.
+% Alterações introduzidas em 0.7-beta.
 %
 % Revision 1.21.2.1  2003/05/30 10:16:07  gweber
 % Correction of bug 137 which causes the class to fail when loading
@@ -1590,8 +1598,8 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
   }%
   {%
    \ifthenelse{\boolean{ABNTbalancedindex}}
-     {\end{multicols*}}
-     {\end{multicols}}%
+     {\end{multicols}}
+     {\end{multicols*}}%
    \endgroup%
    \ifthenelse{\boolean{ABNTrestorecol}}{\twocolumn}{}%
   }%
@@ -1901,315 +1909,6 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
  }%
  {}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                                                                       %%
-%%                          Modelo Unochapecó                            %%
-%%                                                                       %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Monografia-LaTeX (Unochapecó)                                           %
-% Copyright (C) 2013  Daniel Girotto                                      %
-%                                                                         %
-% This program is free software: you can redistribute it and/or modify    %
-% it under the terms of the GNU General Public License as published by    %
-% the Free Software Foundation, either version 3 of the License, or       %
-% (at your option) any later version.                                     %
-%                                                                         %
-% This program is distributed in the hope that it will be useful,         %
-% but WITHOUT ANY WARRANTY; without even the implied warranty of          %
-% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           %
-% GNU General Public License for more details.                            %
-%                                                                         %
-% You should have received a copy of the GNU General Public License       %
-% along with this program.  If not, see <http://www.gnu.org/licenses/>.   %
-
-% ------------------------------------------------------------ %
-% Para que ele entenda o @                                     %
-% ------------------------------------------------------------ %
-\makeatletter
-
-% ------------------------------------------------------------ %
-% Altera o tamanho das fontes dos capítulos e dos apêndices    %
-% ------------------------------------------------------------ %
-\renewcommand{\ABNTchapterfont}{\bfseries\normalsize}
-\renewcommand{\ABNTchaptersize}{\Large}
-\renewcommand{\ABNTanapsize}{\Large}
-
-% ------------------------------------------------------------ %
-% Altera o espaçamento entre dots                              %
-% ------------------------------------------------------------ %
-\renewcommand\@dotsep{0.5}
-
-% ------------------------------------------------------------ %
-% Altera forma de montagem do TableOfContents                  %
-% ------------------------------------------------------------ %
-\renewcommand\l@chapter[2]{
-  \thispagestyle{empty}
-  \ifnum \c@tocdepth >\m@ne
-    \addpenalty{-\@highpenalty}%
-    \vskip 0.5em \@plus\p@
-    \setlength\@tempdima{.8em}%
-    \begingroup
-      \ifthenelse{\boolean{ABNTpagenumstyle}}
-        {\renewcommand{\@pnumwidth}{1.7em}}
-        {}
-      \parindent \z@ \rightskip \@pnumwidth
-      \parfillskip -\@pnumwidth
-      \leavevmode \bfseries\fontsize{3.7mm}{2mm}\selectfont
-      \advance\leftskip\@tempdima
-      \hskip -\leftskip
-      \MakeUppercase{#1}\nobreak\dotfill \nobreak%
-      \hb@xt@\@pnumwidth{\hss \MakeUppercase{#2}}\par
-      \penalty\@highpenalty
-    \endgroup
-  \fi
-}
-
-\renewcommand*\l@section{\@dottedtocline{1}{0em}{1.6em}}
-\renewcommand*\l@subsection{\@dottedtocline{2}{0em}{2.4em}}
-
-\let\stdl@section\l@section
-\renewcommand*{\l@section}[2]{%
-  \leading{1mm}\vspace{-1.48mm}
-  \stdl@section{#1}{#2}}
-
-\let\stdl@subsection\l@subsection
-\renewcommand*{\l@subsection}[2]{%
-  \leading{1mm}\vspace{-1.48mm}
-  \stdl@subsection{\em #1}{#2}}
-
-% ------------------------------------------------------------ %
-% Altera forma de montagem dos Capítulos                       %
-% ------------------------------------------------------------ %
-\def\@makechapterhead#1{%
-  {%
-  \thispagestyle{empty}%
-  \normalsize\bfseries%
-  \espaco{simples}%
-  \noindent%
-  \leading{8mm}
-  \parbox[b]{\textwidth}{%
-    \vspace{1.8cm}
-    \parbox[t]{2.5ex}{\thechapter}%
-    \parbox[t]{\textwidth-7ex-1ex}%
-      {\interlinepenalty\@M\raggedright%
-       \MakeUppercase{#1}}%
-    \vspace*{2.1cm}
-    }\\[2pt]%
-  }%
-}
-
-% ------------------------------------------------------------ %
-% Altera forma de montagem das Seções                          %
-% ------------------------------------------------------------ %
-\def\section{\@startsection {section}{1}%
-  {\z@}{1.0ex plus 1ex minus .2ex \leading{7.5mm}}%
-  {2ex plus .2ex}{\normalsize\bf}}
-
-% ------------------------------------------------------------ %
-% Altera forma de montagem das Subseções                       %
-% ------------------------------------------------------------ %
-\def\subsection{\@startsection {subsection}{2}{\z@}{4mm plus 1ex}
-  {4mm plus 4mm}{\normalsize\em}}
-
-% ------------------------------------------------------------ %
-% Altera o nome das figuras e tabelas no lof e lot             %
-% ------------------------------------------------------------ %
-\usepackage{etoolbox}
-\patchcmd{\@caption}{%
-  \csname the#1\endcsname}%
-  {\bfseries\small%
-    \MakeUppercase{\csname fnum@#1\endcsname \ - }}{}{}
-\renewcommand*\l@figure{\@dottedtocline{1}{0em}{7.5em}}
-\let\l@table\l@figure
-
-% ------------------------------------------------------------ %
-% Altera forma de montagem das Lista de Figuras                %
-% ------------------------------------------------------------ %
-\renewcommand{\listoffigures}{%
-  \pretextualchapter{%
-    \vspace*{1cm}
-    \MakeUppercase{\listfigurename}
-    \vspace*{1.3cm}}
-  \thispagestyle{empty}
-  \@starttoc{lof}%
-}
-
-% ------------------------------------------------------------ %
-% Altera forma de montagem das Lista de Tabelas                %
-% ------------------------------------------------------------ %
-\renewcommand\listoftables{%
-  \pretextualchapter{%
-    \vspace*{1cm}
-    \MakeUppercase{\listtablename}
-    \vspace*{1.3cm}}
-  \thispagestyle{empty}
-  \@starttoc{lot}
-}
-
-% ------------------------------------------------------------ %
-% Define o comando que monta a lista de siglas                 %
-% ------------------------------------------------------------ %
-\newcommand{\listadesiglas}{%
-  \pretextualchapter{%
-  \vspace*{1cm}
-  \MakeUppercase{Lista de Siglas}
-  \vspace*{1.3cm}}\@starttoc{lsg}}
-\newcommand{\sigla}[2]{{\addcontentsline{lsg}{sigla}{%
-  \numberline{#1}- {#2}}}#1}
-\newcommand{\l@sigla}[2]{
-  \thispagestyle{empty}
-  \parindent 0em\@tempdima 6.5em
-  \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
-  \fontsize{12pt}{0pt}\selectfont
-  \vspace{-1.5mm} #1\hfil\nobreak\par}
-
-% ------------------------------------------------------------ %
-% Redefine o tipo de numeração das páginas                     %
-% ------------------------------------------------------------ %
-\renewcommand{\ABNTBeginOfTextualPart}{
-    \renewcommand{\chaptertitlepagestyle}{plainheader}
-    \renewcommand{\thepage}{\arabic{page}}
-    \setcounter{page}{1}}
-
-% ------------------------------------------------------------ %
-% Altera o tamanho do parágrafo                                %
-% ------------------------------------------------------------ %
-\setlength{\parindent}{1.5cm}
-
-% ------------------------------------------------------------ %
-% Capa                                                         %
-% ------------------------------------------------------------ %
-\renewcommand{\capa}{%
-  \thispagestyle{empty}
-  \begin{center}
-    \includegraphics[scale=1.5]{images/image1.jpeg}\\
-
-    \leading{5mm}
-    \textbf{\MakeUppercase{\instituicao}}\\
-    \textbf{\MakeUppercase{\area}}\\
-    \textbf{\MakeUppercase{\curso}}\\
-    \textbf{(\MakeUppercase{\grau})}\\
-
-    \vspace*{5.2cm}
-    \textbf{\MakeUppercase{\titulo}}
-
-    \vspace{5.8cm}
-    \textbf{\MakeUppercase{\autor}}
-
-    \vspace{5.5cm}
-    \normalfont{\textbf{\MakeUppercase{\local, \data}}}
-  \end{center}
-}
-
-% ------------------------------------------------------------ %
-% Folha de rosto                                               %
-% ------------------------------------------------------------ %
-\renewcommand{\folhaderosto}{%
-  \newpage
-  \thispagestyle{empty}
-  \setlength{\topmargin}{1.75cm -1in-\voffset}
-
-  \begin{center}
-    \leading{5mm}
-    \textbf{\MakeUppercase{\instituicao}}\\
-    \textbf{\MakeUppercase{\area}}\\
-    \textbf{\MakeUppercase{curso de \curso}}\\
-    \textbf{(\MakeUppercase{\grau})}\\
-  \end{center}
-
-  \vspace{3.8cm}
-  \begin{center}
-    \textbf{\MakeUppercase{\titulo}}
-  \end{center}
-
-  \vspace{3cm}
-  \hspace{0.4\textwidth}
-  \begin{varwidth}{0.5\textwidth}
-  \leading{5mm}
-    \textbf{\comentario}\par
-  \end{varwidth}
-
-  \vspace{.8cm}
-  \begin{center}
-    \textbf{\MakeUppercase{\autor}}
-  \end{center}
-
-  \vspace{0.4cm}
-  \hspace{.4\textwidth}
-  \begin{minipage}{.5\textwidth}
-    \leading{5mm}
-    Orientador(a): \orientador\par
-  \end{minipage}
-
-  \begin{center}
-    \vspace{4.7cm}
-    \normalfont{\textbf{\MakeUppercase{\local, \data}}}
-  \end{center}
-}
-
-% ------------------------------------------------------------ %
-% Folha de aprovação                                           %
-% ------------------------------------------------------------ %
-\renewcommand{\folhadeaprovacao}{
-  \setlength{\topmargin}{1.75cm -1in-\voffset}
-  \begin{center}
-    \textbf{\MakeUppercase{\titulo}}
-
-    \vspace*{0.5cm}
-    \textbf{\MakeUppercase{\autor}}
-
-    \vspace*{0.5cm}
-    \leading{6mm}
-    \textbf{ESTE RELATÓRIO, DO TRABALHO DE CONCLUSÃO DE CURSO, FOI JULGADO
-    ADEQUADO PARA OBTENÇÃO DO TÍTULO DE:}
-
-    \vspace{1.5cm}
-    \textbf{\MakeUppercase{\grautitulo \ em \curso}}
-
-    \vspace{-1cm}
-    \hspace*{-1.5cm}
-    \assinatura*{\orientador \\ \textbf{Orientador}}
-    \assinatura*{\coorientador \\ \textbf{Co-Orientador}}
-  \end{center}
-
-  \vfil
-  \begin{flushleft}
-    \textbf{BANCA EXAMINADORA:}
-  \end{flushleft}
-
-  \vspace{-1.5cm}
-  \hspace*{-1.5cm}
-  \assinatura*{\membrobancaa \\ Instituição}
-  \assinatura*{\membrobancab \\ Instituição}
-
-  \vspace{-0.5cm}
-  \hspace*{-1.5cm}
-  \assinatura*{\supervisortcc \\ \textbf{ Supervisor de TCC}}
-  \assinatura*{\coordenador \\ \textbf{Coordenador de Curso}}
-
-  \begin{center}
-    \vspace{3.6cm}
-    \normalfont{\textbf{\local, } \datadefesa}
-  \end{center}
-}
-
-% ------------------------------------------------------------ %
-% Altera a forma de apresentação dos Captions                  %
-% ------------------------------------------------------------ %
-\newcommand{\ABNTcaptionsep}{{\bfseries - }}
-\long\def\@makecaption#1#2{%
-  \vskip\abovecaptionskip
-  \sbox\@tempboxa{{\bfseries\small%
-  \MakeUppercase{#1}} \ABNTcaptionsep #2}%
-\global \@minipagefalse
-  \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}
-\vskip\belowcaptionskip}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                                                                       %%
-%%                          Modelo Unochapecó                            %%
-%%                               FIM                                     %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%% auto bold math (try follow bold face in text)
