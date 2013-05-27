@@ -29,6 +29,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
+\usepackage[portuguese, boxed, linesnumbered]{algorithm2e}
 
 \begin{document}
 
@@ -72,6 +73,8 @@
 \addcontentsline{toc}{chapter}{LISTA DE TABELAS}
 \listoftables
 
+\listofalgorithms
+
 % ------------------------------------------------------------ %
 % Altera o título do Sumário                                   %
 % ------------------------------------------------------------ %
@@ -83,13 +86,13 @@
 \sumario
 
 \include{introducao}
-\include{justificativa}
 \include{objetivos}
+\include{justificativa}
 \include{procedimentosmetodologicos}
 \include{revisaobibliografica}
 \include{minhauno}
-\include{servidor}
 \include{pesquisa}
+\include{servidor}
 
 \bibliography{bibliografia}
 

@@ -1,16 +1,85 @@
 \chapter{Servidor}
-% Java - REST - JSON - JSOUP
+% Java - REST - JSON - JSOUP 
+% Anexo 1 = HTML disciplinas material de apoio
+% Anexo 2 = HTML material de apoio
 
 Com o objetivo de extrair e preparar as informações a serem consumidas pela aplicação móvel do sistema acadêmico Minha Uno, foi desenvolvido em linguagem Java um servidor REST para facilitar e agilizar a extração dos dados. 
 
 Utilizando-se da biblioteca \emph{jsoup} para a extração das informações e após o tratamento dos dados gerando-se arquivos JSON transmitidos utilizando um servidor REST, serão detalhadas nas próximas sessões o funcionamento de cada etapa da extração, preparação e transmissão das informações desde o sistema acadêmico Minha Uno até a aplicação móvel.
 
+\section{Ferramentas Utilizadas}
+Para o desenvolvimento do servidor foram utilizadas apenas ferramentas Open-Source, sendo que a linguagem escolhida para o desenvolvimento foi o Java, devido a quantidade de documentação encontrada na internet, e também por possuir bibliotecas prontas que permitem a extração, tratamento e disponibilidade das informações, facilitando assim a implementação do servidor.
+
 \section{Extração das Informações}
 
+Segundo informações obtidas da diretoria de Ti da Unochapecó, a instituição não possui um webservice com as informações do sistema acadêmico, e desta forma as informações exibidas na página são extraidas diretamente de uma coleção de banco de dados, o que tornaria inviável a integração direta com estas bases. Com a excasses de alternativas, foi necessário extrair as informações diretamente da página do sistema acadêmico. Para todos os processos de extração foi utilizada a biblioteca \emph{jsoup}, sendo que a mesma é responsável pela conexão aos diferentes endereços do sistema acadêmico e pela extração das informações a partir do retorno das consultas de navegação, ou seja, sendo extraidas as informações a partir do HTML retornado pelo sistema acadêmico atual.
+
+Após o devido tratamento utilizando-se filtros com expressão regular e outros comandos permitidos pelo \emph{jsoup}, as informações necessárias para a aplicação são obtidas, sendo que na continuidade do capítulo será explicado como cada grupo de informações foi extraido e posteriormente preparado para ser consumido pelos dispositivos móveis.
+
+Todas as expressões utilizadas na biblioteca \emph{jsoup} podem ser testadas na página web \url{http://try.jsoup.org/} utilizando como entrada o código HTML da página a ser analizada. Mais informações sobre as expressões utilizadas podem ser obtidas em \url{http://jsoup.org/cookbook/extracting-data/selector-syntax}.
+
+
 \subsection{Login}
+Com o objetivo de validar se o login fornecido pelo usuário na aplicação é válido e extrair o cookie (identificador de sessão utilizado para as acesso as informações obtidas apenas pelo login válido do usuário), o servidor possuí como primeira tarefa ao receber uma solicitação da aplicação a validação de login.
+
+Utilizando-se do método POST do HTTP, os dados de login são enviados utilizando o endereço \url{https://www.unochapeco.edu.br/usuarios/login?login_submited=1&usuario=USUARIO&senha=SENHA&submit=entrar} (as palavras USUARIO e SENHA devem ser substituidas pelas respectivas informações).
+
+\begin{algorithm}[H]
+ \SetAlgoLined
+ \KwData{Login e Senha do usuário}
+ \KwResult{Cookie de sessão da conexão e indicação de login válido}
+
+ \If{Não existe sessão armazenada}
+ {
+  Obtém o identificador de sessão\;
+ }
+ 
+ Validação da validade do login com base nos elementos retornados pela página\; 
+ 
+\caption{Validação de login e captura de sessão}
+\end{algorithm}
+
+O algoritmo de extração do cookie e validação do login não apresenta nenhuma complexidade, conforme pode-se observar no Algoritmo 1. Para a exemplificação dos algoritmos neste capítulo não será adicionado código fonte em java, exibindo-se trechos de pseudo-código com relevância para este trabalho.
+
 \subsection{Material de Apoio}
+Com o objetivo de extrair a relação dos materiais eletrônicos postados pelos professores em cada disciplina cursada pelo acadêmico. Para melhor entendimento, o algoritmo será dividido em duas partes, sendo que a primeira parte mostrará como são extraidas as informações referentes as disciplinas cursadas pelo acadêmico, e a segunda parte do como são extraidas as informações dos materiais disponíveis.
+
+\subsubsection{Extração das Disciplinas}
+Com o objetivo de obter a lista das disciplinas cursadas pelo acadêmico, a lista das disciplinas é retornada a partir do código HTML obtido através da url \url{https://www.unochapeco.edu.br/saa/materialApoio.php} (o código HTML retornado pode ser observado no anexo 1 deste trabalho) utilizando-se do cookie obtido na validação de login.
+
+Aplicando-se a expressão ``\emph{form tr td:eq(1) a}'' na biblioteca \emph{jsoup} no código HTML, obtem-se como retorno a lista das disciplinas cursadas pelo acadêmico, conforme pode ser visto na figura 5.
+
+\begin{figure}[!htb]
+     \centering
+     \includegraphics[scale=0.5]{imagens/listadisciplinasmaterialapoio.png}
+     \caption[Extração de Informações - Lista de Disciplinas do Material de Apoio]{Lista das disciplinas extraidas. Fonte: Do Autor.}
+\end{figure}
+
+A partir da lista retornada acima, é possível retornar diretamente a disciplina no formato ``\emph{Código - Nome}''. Também como pode-se verificar na Imagem 5, acima do nome da disciplina é exibida a tag HTML completa, sendo que nesta tag pode-se verificar o atributo \emph{href}, que possui o caminho completo para serem extraidos os materiais da disciplina.
+
+Após a extração do nome da disciplina e da tag \emph{href}, é necessária a extração das informações dos materiais da disciplina, explicada na sessão 5.2.2.2 deste trabalho.
+
+\subsubsection{Extração dos Materiais}
+Após a extração da lista de disciplinas e da referência ao endereço web onde as disciplinas podem ser acessadas, é necessário extrair as informações dos materiais propriamente ditos.
+
+A partir do código HTML (disponível no anexo 2, sendo que o mesmo é pertencente a uma disciplina do 9º período de Ciência da Computação na grade 348) obtido pela url capturada (conforme explicado na sessão 5.2.2.1). No código retornado, existem 4 informações relevantes, sendo elas: nome, url, publicação e descrição.
+
+Para a extração do nome do material, a expressão ``\emph{form tr:contains(Arquivo) a}'', sendo que a mesma retorna uma lista com o nome das disciplinas, conforme pode ser visto na Figura 6.
+
+\begin{figure}[!htb]
+     \centering
+     \includegraphics[scale=0.35]{imagens/listamateriaisdisciplinasnomematerial.png}
+     \caption[Extração de Informações - Lista dos Materiais de uma disciplina]{Lista de materiais de uma disciplina. Fonte: Do Autor.}
+\end{figure}
+
+Verificamos na Figura 6 que a mesma expressão retorna no campo principal o nome das disciplinas, e na sua referência (exibida em vermelho) o campo href, que nos é interessante para o acesso direto ao arquivo listado. Desta forma, utilizando-se da mesma expressão é possível extrair a url de acesso direto ao arquivo e também o nome do arquivo a ser acessado. Desta forma, duas informações já são preenchidas a partir da mesma consulta. 
+
+
+
 \subsection{Notas da Graduação}
+
 \subsection{Horários do Semestre}
+
 
 \section{Preparação dos Dados}
 

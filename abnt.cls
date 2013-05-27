@@ -142,21 +142,21 @@
 % Retirado um bug no \@chapter que causa o cabecalho ter o numero do capitulo errado
 %
 % Revision 1.26  2003/10/13 09:40:01  gweber
-% Passa a usar cvs-id.def para gerar informações sobre data e versão.
+% Passa a usar cvs-id.def para gerar informaÃ§Ãµes sobre data e versÃ£o.
 %
 % Revision 1.25  2003/09/16 16:49:29  gweber
-% Troca de \bibname por \refname o que equivale a trocar "Referêncas Bibliográficas" por
-% "Referências". Isto atende ao que entendemos esteja implícito na NBR14724-2002.
+% Troca de \bibname por \refname o que equivale a trocar "ReferÃªncas BibliogrÃ¡ficas" por
+% "ReferÃªncias". Isto atende ao que entendemos esteja implÃ­cito na NBR14724-2002.
 %
 % Revision 1.24  2003/08/22 14:45:18  gweber
 % Resolvido bug 178 que fazia o texto de \part aparecer duas vezes.
 %
 % Revision 1.23  2003/06/30 14:10:47  gweber
-% Links criados com hyperref para apêndices e anexos não misturam mais com os links para capítulos comuns,
+% Links criados com hyperref para apÃªndices e anexos nÃ£o misturam mais com os links para capÃ­tulos comuns,
 % resolvendo o bug #140.
 %
 % Revision 1.22  2003/05/30 10:39:19  gweber
-% Alterações introduzidas em 0.7-beta.
+% AlteraÃ§Ãµes introduzidas em 0.7-beta.
 %
 % Revision 1.21.2.1  2003/05/30 10:16:07  gweber
 % Correction of bug 137 which causes the class to fail when loading
