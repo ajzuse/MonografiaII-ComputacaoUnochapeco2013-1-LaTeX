@@ -18,32 +18,55 @@ Após o devido tratamento utilizando-se filtros com expressão regular e outros 
 
 Todas as expressões utilizadas na biblioteca \emph{jsoup} podem ser testadas na página web \url{http://try.jsoup.org/} utilizando como entrada o código HTML da página a ser analizada. Mais informações sobre as expressões utilizadas podem ser obtidas em \url{http://jsoup.org/cookbook/extracting-data/selector-syntax}.
 
+Como toda a extração é baseada no retorno do código HTML do sistema atual, qualquer alteração no layout do arquivo HTML retornado pela página do sistema acadêmico Minha Uno resultará em problemas na extração dos dados.
+
 
 \subsection{Login}
 Com o objetivo de validar se o login fornecido pelo usuário na aplicação é válido e extrair o cookie (identificador de sessão utilizado para as acesso as informações obtidas apenas pelo login válido do usuário), o servidor possuí como primeira tarefa ao receber uma solicitação da aplicação a validação de login.
 
 Utilizando-se do método POST do HTTP, os dados de login são enviados utilizando o endereço \url{https://www.unochapeco.edu.br/usuarios/login?login_submited=1&usuario=USUARIO&senha=SENHA&submit=entrar} (as palavras USUARIO e SENHA devem ser substituidas pelas respectivas informações).
 
-\begin{algorithm}[H]
- \SetAlgoLined
- \KwData{Login e Senha do usuário}
- \KwResult{Cookie de sessão da conexão e indicação de login válido}
+%\begin{algorithm}[H]
+% \SetAlgoLined
+% \KwData{Login e Senha do usuário}
+% \KwResult{Cookie de sessão da conexão e indicação de login válido}
 
- \If{Não existe sessão armazenada}
- {
-  Obtém o identificador de sessão\;
- }
+% \If{Não existe sessão armazenada}
+% {
+%  Obtém o identificador de sessão\;
+% }
  
- Validação da validade do login com base nos elementos retornados pela página\; 
+% Validação da validade do login com base nos elementos retornados pela página\; 
  
-\caption{Validação de login e captura de sessão}
-\end{algorithm}
+%\caption{Validação de login e captura de sessão}
+%\end{algorithm}
+
+%\begin{algorithm}
+%\caption{Validação de login e captura de Cookie}
+%\begin{algorithmic}[1]
+
+%$var session \gets null$
+
+%\Function{connect}{user, pass}
+%  \If {$session = vazio$}
+%    \State $session \gets identificador de sessão extraido utilizando jsoup$
+%  \EndIf
+  
+%  \State \Return Cookie da da sessão
+%\EndFunction
+%\end{algorithmic}
+%\end{algorithm}
 
 O algoritmo de extração do cookie e validação do login não apresenta nenhuma complexidade, conforme pode-se observar no Algoritmo 1. Para a exemplificação dos algoritmos neste capítulo não será adicionado código fonte em java, exibindo-se trechos de pseudo-código com relevância para este trabalho.
 
+%%% Aqui é a sessão de extração do material de apoio
 \subsection{Material de Apoio}
 Com o objetivo de extrair a relação dos materiais eletrônicos postados pelos professores em cada disciplina cursada pelo acadêmico. Para melhor entendimento, o algoritmo será dividido em duas partes, sendo que a primeira parte mostrará como são extraidas as informações referentes as disciplinas cursadas pelo acadêmico, e a segunda parte do como são extraidas as informações dos materiais disponíveis.
 
+%Aqui ta o algoritmo q vc nunca acha Andrei!!!!
+%O Algoritmo 2 mostra como as informações dos materiais são extraidas, e o mesmo será detalhado nos itens 5.2.2.1 e 5.2.2.2.
+
+%%% Aqui é a subsubsessão de extração das disciplinas
 \subsubsection{Extração das Disciplinas}
 Com o objetivo de obter a lista das disciplinas cursadas pelo acadêmico, a lista das disciplinas é retornada a partir do código HTML obtido através da url \url{https://www.unochapeco.edu.br/saa/materialApoio.php} (o código HTML retornado pode ser observado no anexo 1 deste trabalho) utilizando-se do cookie obtido na validação de login.
 
@@ -59,6 +82,7 @@ A partir da lista retornada acima, é possível retornar diretamente a disciplin
 
 Após a extração do nome da disciplina e da tag \emph{href}, é necessária a extração das informações dos materiais da disciplina, explicada na sessão 5.2.2.2 deste trabalho.
 
+%%% Aqui é a subsubsessão de extração dos materiais
 \subsubsection{Extração dos Materiais}
 Após a extração da lista de disciplinas e da referência ao endereço web onde as disciplinas podem ser acessadas, é necessário extrair as informações dos materiais propriamente ditos.
 
@@ -69,14 +93,37 @@ Para a extração do nome do material, a expressão ``\emph{form tr:contains(Arq
 \begin{figure}[!htb]
      \centering
      \includegraphics[scale=0.35]{imagens/listamateriaisdisciplinasnomematerial.png}
-     \caption[Extração de Informações - Lista dos Materiais de uma disciplina]{Lista de materiais de uma disciplina. Fonte: Do Autor.}
+     \caption[Extração de Informações - Lista de Nomes dos Materiais de uma disciplina]{Lista de nomes dos materiais de uma disciplina. Fonte: Do Autor.}
 \end{figure}
 
 Verificamos na Figura 6 que a mesma expressão retorna no campo principal o nome das disciplinas, e na sua referência (exibida em vermelho) o campo href, que nos é interessante para o acesso direto ao arquivo listado. Desta forma, utilizando-se da mesma expressão é possível extrair a url de acesso direto ao arquivo e também o nome do arquivo a ser acessado. Desta forma, duas informações já são preenchidas a partir da mesma consulta. 
 
+Para obtermos a publicação, que nada mais é o nome do professor que postou o material e a data de postagem, utiliza-se a expressão ``\emph{form tr:contains(Publicação) td:eq(1)}'', e o seu retorno pode ser verificado na Figura 7.
 
+\begin{figure}[!htb]
+     \centering
+     \includegraphics[scale=0.7]{imagens/listamateriaisdisciplinaspublicacao.png}
+     \caption[Extração de Informações - Lista das publicações dos materiais]{Lista de publicação dos materiais de uma disciplina. Fonte: Do Autor.}
+\end{figure}
+
+Para obtermos a descrição dos materiais postados, a expressão ``\emph{form tr:contains(Descrição) td:eq(1)}'' onde obtém-se como resultado a lista da descrições dos materiais, confome pode ser visto na Figura 8.
+
+\begin{figure}[!htb]
+     \centering
+     \includegraphics[scale=0.6]{imagens/listamateriaisdisciplinasdescricao.png}
+     \caption[Extração de Informações - Lista das descrições dos materiais]{Lista de descrição dos materiais de uma disciplina. Fonte: Do Autor.}
+\end{figure}
+
+\newpage
 
 \subsection{Notas da Graduação}
+Com o objetivo de de extrair as avaliações e as respectivas notas das avaliações aplicadas aos acadêmicos, foi desenvolvida a classe de extração das notas da graduação. Para melhor entendimento, o algoritmo será dividido em três partes, onde a primeira representará a extração da lista de disciplinas cursadas pelos acadêmicos, a segunda as informações referentes as avaliações e notas das disciplinas em aberto e a terceira parte explicará a extração das disciplinas já finalizadas pelo acadêmico.
+
+\subsubsection{Extração das Disciplinas}
+
+\subsubsection{Extração das Notas das Disciplinas em Aberto}
+
+\subsubsection{Extração das Notas das Disciplilas Finalizadas}
 
 \subsection{Horários do Semestre}
 
