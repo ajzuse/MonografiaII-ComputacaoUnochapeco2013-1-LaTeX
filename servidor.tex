@@ -68,14 +68,15 @@ Com o objetivo de extrair a relação dos materiais eletrônicos postados pelos 
 
 %%% Aqui é a subsubsessão de extração das disciplinas
 \subsubsection{Extração das Disciplinas}
-Com o objetivo de obter a lista das disciplinas cursadas pelo acadêmico, a lista das disciplinas é retornada a partir do código HTML obtido através da url \url{https://www.unochapeco.edu.br/saa/materialApoio.php} (o código HTML retornado pode ser observado no anexo 1 deste trabalho) utilizando-se do cookie obtido na validação de login.
+Com o objetivo de extrair a lista das disciplinas pertencentes ao módulo de material de apoio do sistema acadêmico, é necessário que a informação seja extraida a partir do código HTML retornado pela url \url{https://www.unochapeco.edu.br/saa/materialApoio.php}. Para a obtenção das disciplinas corretas cursadas pelo acadêmico, é utilizado o cookie de sessão capturado no momento do login, conforme explicado no item 5.2.1 deste trabalho. Um exemplo de código HTML retornado pelo servidor a partir deste tipo de consulta pode ser visto no anexo 1 deste trabalho.
 
-Aplicando-se a expressão ``\emph{form tr td:eq(1) a}'' na biblioteca \emph{jsoup} no código HTML, obtem-se como retorno a lista das disciplinas cursadas pelo acadêmico, conforme pode ser visto na figura 5.
+Em posse do código HTML retornado e aplicando-se a expressão ``\emph{form tr td:eq(1) a}'' na biblioteca \emph{jsoup} sob o mesmo, obtém-se como retorno a lista das disciplinas cursadas pelo acadêmico, conforme pode ser visto na figura 5.
 
 \begin{figure}[!htb]
      \centering
+     \caption[Extração de Informações - Lista de Disciplinas do Material de Apoio]{Lista das disciplinas extraidas.}
      \includegraphics[scale=0.5]{imagens/listadisciplinasmaterialapoio.png}
-     \caption[Extração de Informações - Lista de Disciplinas do Material de Apoio]{Lista das disciplinas extraidas. Fonte: Do Autor.}
+     \\ Fonte: Do Autor.
 \end{figure}
 
 A partir da lista retornada acima, é possível retornar diretamente a disciplina no formato ``\emph{Código - Nome}''. Também como pode-se verificar na Imagem 5, acima do nome da disciplina é exibida a tag HTML completa, sendo que nesta tag pode-se verificar o atributo \emph{href}, que possui o caminho completo para serem extraidos os materiais da disciplina.
@@ -92,8 +93,9 @@ Para a extração do nome do material, a expressão ``\emph{form tr:contains(Arq
 
 \begin{figure}[!htb]
      \centering
+     \caption[Extração de Informações - Lista de Nomes dos Materiais de uma disciplina]{Lista de nomes dos materiais de uma disciplina.}
      \includegraphics[scale=0.35]{imagens/listamateriaisdisciplinasnomematerial.png}
-     \caption[Extração de Informações - Lista de Nomes dos Materiais de uma disciplina]{Lista de nomes dos materiais de uma disciplina. Fonte: Do Autor.}
+     \\  Fonte: Do Autor.
 \end{figure}
 
 Verificamos na Figura 6 que a mesma expressão retorna no campo principal o nome das disciplinas, e na sua referência (exibida em vermelho) o campo href, que nos é interessante para o acesso direto ao arquivo listado. Desta forma, utilizando-se da mesma expressão é possível extrair a url de acesso direto ao arquivo e também o nome do arquivo a ser acessado. Desta forma, duas informações já são preenchidas a partir da mesma consulta. 
@@ -101,17 +103,19 @@ Verificamos na Figura 6 que a mesma expressão retorna no campo principal o nome
 Para obtermos a publicação, que nada mais é o nome do professor que postou o material e a data de postagem, utiliza-se a expressão ``\emph{form tr:contains(Publicação) td:eq(1)}'', e o seu retorno pode ser verificado na Figura 7.
 
 \begin{figure}[!htb]
-     \centering
+     \centering     
+     \caption[Extração de Informações - Lista das publicações dos materiais]{Lista de publicação dos materiais de uma disciplina.}
      \includegraphics[scale=0.7]{imagens/listamateriaisdisciplinaspublicacao.png}
-     \caption[Extração de Informações - Lista das publicações dos materiais]{Lista de publicação dos materiais de uma disciplina. Fonte: Do Autor.}
+     \\  Fonte: Do Autor.
 \end{figure}
 
 Para obtermos a descrição dos materiais postados, a expressão ``\emph{form tr:contains(Descrição) td:eq(1)}'' onde obtém-se como resultado a lista da descrições dos materiais, confome pode ser visto na Figura 8.
 
 \begin{figure}[!htb]
      \centering
+     \caption[Extração de Informações - Lista das descrições dos materiais]{Lista de descrição dos materiais de uma disciplina.}
      \includegraphics[scale=0.6]{imagens/listamateriaisdisciplinasdescricao.png}
-     \caption[Extração de Informações - Lista das descrições dos materiais]{Lista de descrição dos materiais de uma disciplina. Fonte: Do Autor.}
+     \\  Fonte: Do Autor.
 \end{figure}
 
 \newpage
@@ -119,7 +123,11 @@ Para obtermos a descrição dos materiais postados, a expressão ``\emph{form tr
 \subsection{Notas da Graduação}
 Com o objetivo de de extrair as avaliações e as respectivas notas das avaliações aplicadas aos acadêmicos, foi desenvolvida a classe de extração das notas da graduação. Para melhor entendimento, o algoritmo será dividido em três partes, onde a primeira representará a extração da lista de disciplinas cursadas pelos acadêmicos, a segunda as informações referentes as avaliações e notas das disciplinas em aberto e a terceira parte explicará a extração das disciplinas já finalizadas pelo acadêmico.
 
+Assim como na sessão 5.2.2, será utilizada a biblioteca \emph{jsoup} para extração das informações, utilizando-se das mesmas recomendações da sessão mencionada anteriormente.
+
 \subsubsection{Extração das Disciplinas}
+Com o objetivo de extrair a lista das disciplinas pertencentes ao módulo de notas da graduação do sistema acadêmico, é necessário que a informação seja extraida a partir do código HTML retornado pela url \url{https://www.unochapeco.edu.br/saa/notas.php}. Para a obtenção das disciplinas corretas cursadas pelo acadêmico, é utilizado o cookie de sessão capturado no momento do login, conforme explicado no item 5.2.1 deste trabalho. Um exemplo de código HTML retornado pelo servidor a partir deste tipo de consulta pode ser visto no anexo 2 deste trabalho.
+
 
 \subsubsection{Extração das Notas das Disciplinas em Aberto}
 

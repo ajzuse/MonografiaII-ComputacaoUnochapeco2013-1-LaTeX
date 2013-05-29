@@ -29,35 +29,8 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
-%\usepackage[portuguese, boxed, linesnumbered]{algorithm2e}
-\usepackage{algpseudocode,algorithm}
 
 \begin{document}
-
-%%%%%%%%%%%%%%%%%% Renew para algoritmos %%%%%%%%%%%%%%%%%%%%%%%%%%
-% Declaracoes em Português
-\algrenewcommand\algorithmicend{\textbf{fim}}
-\algrenewcommand\algorithmicdo{\textbf{faça}}
-\algrenewcommand\algorithmicwhile{\textbf{enquanto}}
-\algrenewcommand\algorithmicfor{\textbf{para}}
-\algrenewcommand\algorithmicif{\textbf{se}}
-\algrenewcommand\algorithmicthen{\textbf{então}}
-\algrenewcommand\algorithmicelse{\textbf{senão}}
-\algrenewcommand\algorithmicreturn{\textbf{devolve}}
-\algrenewcommand\algorithmicfunction{\textbf{função}}
-
-% Rearranja os finais de cada estrutura
-\algrenewtext{EndWhile}{\algorithmicend\ \algorithmicwhile}
-\algrenewtext{EndFor}{\algorithmicend\ \algorithmicfor}
-\algrenewtext{EndIf}{\algorithmicend\ \algorithmicif}
-\algrenewtext{EndFunction}{\algorithmicend\ \algorithmicfunction}
-
-% O comando For, a seguir, retorna 'para #1 -- #2 até #3 faça'
-\algnewcommand\algorithmicto{\textbf{até}}
-\algrenewtext{For}[3]%
-{\algorithmicfor\ #1 $\gets$ #2 \algorithmicto\ #3 \algorithmicdo}
-
-%%%%%%%%%%%%%%%%%%% Fim renew para algoritmos %%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\area}{área de ciências exatas e ambientais}
 \newcommand{\curso}{ciência da computação}
