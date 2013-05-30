@@ -4,6 +4,8 @@
 % Anexo 2 = HTML material de apoio
 % Anexo 3 = HTML notas da graduação
 % Anexo 4 = HTML avaliações
+% Anexo 5 = HTML Horarios do Semestre
+% Anexo 6 = HTML Detalhes Horario Semestre
 Com o objetivo de extrair e preparar as informações a serem consumidas pela aplicação móvel do sistema acadêmico Minha Uno, foi desenvolvido em linguagem Java um servidor REST para facilitar e agilizar a extração dos dados. 
 
 Utilizando-se da biblioteca \emph{jsoup} para a extração das informações e após o tratamento dos dados gerando-se arquivos JSON transmitidos utilizando um servidor REST, serão detalhadas nas próximas sessões o funcionamento de cada etapa da extração, preparação e transmissão das informações desde o sistema acadêmico Minha Uno até a aplicação móvel.
@@ -154,7 +156,7 @@ Para a extração da lista de avaliações, é utilizada a expressão \emph{form
 
 Como pode ser percebido na Figura 10, as informações aparecem um pouco misturadas, sendo necessário tratar via programação as informações que realmente serão extraidas e ignorando as informações que não são necessárias. Isto é feito por meio de uma verificação de quando a informação contida na quarta coluna da tabela retornada esta em branco ou contém a palavra notas.
 
-%%%%% Colocar aqui o algoritmo bocó %%%%%%
+\textbf{AQUI VAI O ALGORITMO DE EXTRAÇAO DAS AVALIAÇOES E NOTAS DAS DISCIPLINAS!!!!!!}
 
 A partir do retorno acima, são extraidas as seguintes informações das avaliações: nome, peso, data e nota. Cada uma destas informações possui uma expressão aplicada sobre a expressão base. A Tabela 7 contém a expressão para cada informação e a ser extraida.
 
@@ -191,10 +193,92 @@ Após estes procedimentos a extração das avaliações, assim como das médias 
 \subsubsection{Extração das Notas das Disciplilas Finalizadas}
 Finalizando a sessão de extração das notas da graduação, a extração das notas das disciplinas já finalizadas ocorre em cima do mesmo código HTML obtido no item 5.2.3.1 deste trabalho, que pode ser consultado no anexo 3.
 
-Devido a ordem em que as disciplinas são exibididas na lista de disciplinas ser diferente a ordem exibida nas notas oficiais da graduação, a expressão utilizada para a busca das notas de disciplinas já finalizadas leva em consideração o código da disciplina encerrada, extraindo o mesmo a partir do atributo href da tag html retornada na lista de disciplinas. Para o retorno das informações da disciplina já finalizada, é utilizada a expressão \emph{form[name\$=graduacao] tr:contains(CODIGODISCIPLINA)}, sendo que a constante CODIGODISCIPLINA é substituida pelo código propriamente dito.
+Devido a ordem em que as disciplinas são exibididas na lista de disciplinas ser diferente a ordem exibida nas notas oficiais da graduação, a expressão utilizada para a busca das notas de disciplinas já finalizadas leva em consideração o código da disciplina encerrada, extraindo o mesmo a partir do atributo href da tag html retornada na lista de disciplinas. Para o retorno das informações da disciplina já finalizada, é utilizada a expressão \emph{form[name\$=graduacao] tr:contains(CODIGODISCIPLINA)}, sendo que a palavra CODIGODISCIPLINA deve ser substituida pelo código propriamente dito.
 
 \subsection{Horários do Semestre}
+Com o objetivo de extrair o horário das disciplinas cursadas pelo acadêmico, e também as informações detalhadas da disciplina, foi desenvolvida a classe de extração dos horários do semestre. Para facilitar o entendimento, a explicação do processo será dividido em três partes, sendo elas: Extração do nome das disciplinas, Extração das informações gerais da disciplina e Extração dos Horários de Aula.
 
+\subsubsection{Extração das Disciplinas}
+Com o objetivo de extrair a lista das disciplinas pertencentes ao módulo de horários do semestre do sistema acadêmico, é necessário que a informação seja extraida a partir do código HTML retornado pela url \url{https://www.unochapeco.edu.br/saa/hor_aluno.php}. Para a obtenção das disciplinas corretas cursadas pelo acadêmico, é utilizado o cookie de sessão capturado no momento do login, conforme explicado no item 5.2.1 deste trabalho. Um exemplo de código HTML retornado pelo servidor a partir deste tipo de consulta pode ser visto no Anexo 5 deste trabalho.
+
+A partir do código HTML retornado, utilizando-se das expressões exibidas na Tabela 9 são extraidas as informações de código, nome e turma da disciplina.
+
+\begin{table}[!hbt]
+\centering
+\caption[Extração de Informações - Expressões de Extração Horários do Semestre]{Tabela de expressões de extração dos horários do semestre.}
+\vspace{3mm}
+\begin{tabular}{p{3cm}|c}\hline
+\bf{Informação} & \bf{Expressão}           \\ \hline
+Código          & form tr:gt(1) td:eq(0) a \\ \hline
+Nome            & form tr:gt(1) td:eq(1) a \\ \hline
+Turma           & form tr:gt(1) td:eq(2) a \\ \hline
+\end{tabular}
+\\ Fonte: elaboração do autor.
+\end{table}
+
+\textbf{VERIFICAR COM O MC SE DEVEM SER COLOCADAS IMAGENS AQUI!!!}
+
+Como ocorre na extrações anteriores, é necessário extrair da tag HTML retornada o atributo \emph{href} para serem extraidas tanto as informações gerais como os horários de aula da disciplina.
+
+Após terminada a extração das disciplinas, e possuindo a url armazenada no atributo \emph{href}, agora são extraidas as informações gerais das disciplinas e também os horários de aula.
+
+\subsubsection{Extração das Informações Gerais}
+A extração das Informações gerais ocorre a partir da url extraida da disciplina como visto no item 5.2.4.1 deste trabalho. Para a extração das informarmações é necessária uma expressão para cada informação, sendo demonstradas as expressões na tabela 10. O código HTML retornado pela página do sistema acadêmico para uma disciplina de exemplo pode ser consultado no Anexo 6 deste trabalho.
+
+\begin{table}[!hbt]
+\centering
+\caption[Extração de Informações - Expressões de Extração dos Detalhes da Disciplina]{Tabela de expressões de extração dos detalhes das disciplinas.}
+\vspace{3mm}
+\begin{tabular}{p{3cm}|c}\hline
+\bf{Informação} & \bf{Expressão}                                 \\ \hline
+Curso           & form tr[bgcolor]:contains(curso) td:eq(1)      \\ \hline
+Grade           & form tr[bgcolor]:contains(grade) td:eq(1)      \\ \hline
+Disciplina      & form tr[bgcolor]:contains(disciplina) td:eq(1) \\ \hline
+Período         & form tr[bgcolor]:contains(período) td:eq(1)    \\ \hline
+Professor       & form tr[bgcolor]:contains(professor) td:eq(1)  \\ \hline
+Turno           & form tr[bgcolor]:contains(turno) td:eq(1)      \\ \hline
+Créditos        & form tr[bgcolor]:contains(créditos) td:eq(1)   \\ \hline
+Data da G2      & form tr[bgcolor]:contains(g2) td:eq(1)         \\ \hline
+Data da G3      & form tr[bgcolor]:contains(g3) td:eq(1)         \\ \hline
+\end{tabular}
+\\ Fonte: elaboração do autor.
+\end{table}
+
+\textbf{VERIFICAR COM O MC SE DEVEM SER COLOCADAS IMAGENS COM OS DETALHES EXTRAIDOS AQUI!!!!}
+
+A partir de cada uma das expressões presentes na Tabela 10, obtemos cada uma das informações que fazem parte dos detalhes da disciplina cursada pelo acadêmico, e desta forma encerramos a extração dos detalhes, iniciando a extração dos horários de aula explicada no item 5.2.4.3.
+
+\subsubsection{Extração dos Horários de Aula}
+Como última parte da extração das informações, falaremos da Extração dos horários de aula. Tendo como base a mesma url e código HTML utilizado no item 5.2.4.2 deste trabalho, podemos obter os horários de aula das disciplinas. Para isso é aplicada a expressão \emph{form table:eq(1) tr:gt(1)} que nos retorna a lista com as aulas da disciplina, conforme pode ser visto na Figura 11.
+
+\begin{figure}[!htb]
+     \centering
+     \caption[Extração de Informações - Horários do Semestre]{Lista de horários para uma disciplina.}
+     \includegraphics[scale=0.5]{imagens/listahorariossemestre.png}
+     \\  Fonte: Do Autor.
+\end{figure}
+
+\newpage
+
+A partir do retorno da expressão demonstrado na Figura 11, são aplicadas novas expressões para obter-se as informações específicas necessárias, sendo estas expressões mostradas na Tabela X.
+
+\begin{table}[!hbt]
+\centering
+\caption[Extração de Informações - Expressões de Extração dos Detalhes da Disciplina]{Tabela de expressões de extração dos detalhes das disciplinas.}
+\vspace{3mm}
+\begin{tabular}{p{3cm}|c}\hline
+\bf{Informação} & \bf{Expressão}                                 \\ \hline
+Data            & td:eq(0) \\ \hline
+Dia da Semana   & td:eq(1) \\ \hline
+Hora            & td:eq(2) \\ \hline
+Ocorreu         & b        \\ \hline
+\end{tabular}
+\\ Fonte: elaboração do autor.
+\end{table}
+
+Para saber se a aula já foi ministrada ou não, é validado se a informação sendo extraida está em negrito no código HTML, acrescentando-se a expressão \emph{b} a expressão original.
+
+Desta forma, toda a extração de informações utilizando a biblioteca \emph{jsoup} é finalizada, sendo necessário agora preprar o arquivo que será enviado ao aplicativo móvel utilizando o servidor REST.
 
 \section{Preparação dos Dados}
 
