@@ -281,5 +281,9 @@ Para saber se a aula já foi ministrada ou não, é validado se a informação s
 Desta forma, toda a extração de informações utilizando a biblioteca \emph{jsoup} é finalizada, sendo necessário agora preprar o arquivo que será enviado ao aplicativo móvel utilizando o servidor REST.
 
 \section{Preparação dos Dados}
+A preparação dos dados para o envio para a aplicação móvel é feita em conjunto com a extração dos dados da página, porém para demonstrar de forma mais simples e facilitar o entendimento este capítulo irá demonstrar apenas o layout dos arquivos gerados. 
+
+Toda a geração dos arquivos funciona como retorno das funções de extração, sendo que o retorno ocorre em formato JSON, devido ao formato simples de representação de dados e economia da banda de dados se comparado com o formato XML, já que o JSON não possui tags de fechamento e cabeçalho nos arquivos. Não existe muitas coisas a serem explicadas sobre os arquivos gerados, pois os mesmos são de fácil leitura e entendimento, e juntamente com as informações já comentadas no item 5.2 deste trabalho causaria redundância nas informações.
 
 \section{Servidor REST}
+Após extração e preparação dos dados, resta apenas disponibilizar as informações para os
