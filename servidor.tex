@@ -286,4 +286,26 @@ A preparação dos dados para o envio para a aplicação móvel é feita em conj
 Toda a geração dos arquivos funciona como retorno das funções de extração, sendo que o retorno ocorre em formato JSON, devido ao formato simples de representação de dados e economia da banda de dados se comparado com o formato XML, já que o JSON não possui tags de fechamento e cabeçalho nos arquivos. Não existe muitas coisas a serem explicadas sobre os arquivos gerados, pois os mesmos são de fácil leitura e entendimento, e juntamente com as informações já comentadas no item 5.2 deste trabalho causaria redundância nas informações.
 
 \section{Servidor REST}
-Após extração e preparação dos dados, resta apenas disponibilizar as informações para os
+Após extração e preparação dos dados, resta apenas disponibilizar as informações para acesso externo. Para esta tarefa foi utilizada a classe IceBreakRestServer, que implementa um servidor REST básico que supre as necessidades deste trabalho. Foi necessária apenas uma alteração no cabeçalho HTML retornado pela classe, o qual retornava tamanhos errados, que acabavam ocasionando a perda de informações do arquivo JSON. Como não é um parâmetro obrigatório do cabeçalho do HTML, o tamanho deixou de ser enviado no mesmo, e assim o problema deixou de existir. 
+
+Como todo serviço de rede, é necessário escutar uma porta para receber as conexões, e neste trabalho foi escolhida a porta 90 para o servidor REST, pois assim não ocasionaria um conflito com a porta 80 utilizada pelos servidores HTTP.
+
+Como possuimos três tipos de retorno no servidor, cada um referente a um módulo do sistema acadêmico, para otimizar o envio e também otimizar a extração no lado da aplicação, foram utilizados parâmetros na URL utilizada para conectar ao servidor, sendo estes parâmetros demonstradas na tabela 12.
+
+\begin{table}[!hbt]
+\centering
+\caption[Servidor REST - Parâmetros do Servidor]{Tabela com os parâmetros aceitos pelo servidor REST.}
+\vspace{3mm}
+\begin{tabular}{p{3cm}|p{9cm}}\hline
+\textbf{Parâmetro} & \textbf{Descrição} \\ \hline
+usuario            & Neste parâmetro é possível passar ao servidor tanto a matrícula do acadêmico como o seu email da Unochapecó. Parâmetro Obrigatório  \\ \hline
+senha              & Neste parâmetro deve ser informada a senha do acadêmico referente a matrícula ou email informado. Parâmetro Obrigatório. \\ \hline
+info               & Neste campo é passado o tipo de informação que deseja ser recebida do servidor. \\ \hline
+\end{tabular}
+\\ Fonte: elaboração do autor.
+\end{table}
+
+\newpage
+O parâmetro \emph{info} presente na Tabela 12 merece uma atenção especial, pois o mesmo não é obrigatório. Caso o mesmo seja omitido da URL de conexão com o servidor, teremos como retorno um valor booleano informando se o login é válido. Nesta implementação do servidor, são três as possíveis opções para o parâmetro \emph{info}: materiais, notas e horarios. Cada uma das opções refere-se a um dos módulos do sistema acadêmico extraidos anteriormente.
+
+O acesso ao servidor ocorre por meio de requisições HTTP na porta 90. Por exemplo, caso se deseje se obter as informações do material de apoio de determinado acadêmico com o nome de usuário \emph{teste} e a senha \emph{teste}, e o servidor estivesse rodando localmente na máquina utilizada para consulta, bastaria utilizar a URL \url{http://localhost:90?usuario=teste&senha=teste&info=materiais}, sendo assim o servidor encarregado de validar o login e retornar as informações corretas referentes aos materiais de apoio do acadêmico.
