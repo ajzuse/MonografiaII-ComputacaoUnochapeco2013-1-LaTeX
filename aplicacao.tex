@@ -1,1 +1,167 @@
 \chapter{Aplicação}
+
+% Referencias - SQLite, JSON, APPCELERATOR TITANIUM, JavaScript, SQL
+
+Tendo como base o questionário apresentado anteriormente onde obtemos maior quantidade de respostas referentes aos acadêmicos de cursos de graduação, foi decidido para este trabalho implementar a aplicação para este público alvo, sendo implementados os módulos que apresentaram as três melhores notas, sendo eles Material de Apoio, Notas da Graduação e Horários do Semestre.
+
+Para o desenvolvimento da aplicação, foi utilizado exclusivamente a ferramenta de desenvolvimento \emph{Titanium SDK} desenvolvida pela \emph{Appcelerator Inc.} devido ao fato de a mesma ser gratuita e utilizar uma linguagem com curva de aprendizado fácil. Além disso o fato de utilizar a mesma e desenvolver em JavaScript utilizando ela facilitou a comunicação com o servidor e a extração dos arquivos JSON retornados por ele. Além disso, utilizando-se o \emph{Titanium SDK} para o desenvolvimento, é possível compilar com o mesmo código fonte aplicações para Android e iOS, plataformas mais utilizadas pelos acadêmicos da instituição.
+
+Todas as informações extraidas do servidor são inseridas em uma base de dados SQLite no próprio dispositivo, possibilitando assim a consulta offline das informações.
+
+Para facilitar e modularizar este capítulo, as informações referentes a cada módulo foram separadas em sessões que serão apresentadas a seguir.
+
+\section{Base de Dados da Aplicação}
+
+Com o objetivo de armazenar as informações enviadas pelo servidor, foi modelada uma pequena base de dados composta por 5 tabelas utilizadas no armazenamento de dados e uma tabela para armazenamento das configurações. Para esta base de dados foi utilizado o SQLite, nativo nos dispositivos Android e iOS.
+
+\subsection{Tabela de Configuração}
+A tabela de configuração é a única tabela não transmitida pelo servidor para a aplicação, sendo gerada e manipulada no próprio dispositivo. A lista de campos e seus respectivos tipos de dados é demonstrada na Tabela 13.
+
+\begin{table}[!hbt]
+\centering
+\caption[Aplicação - Tabela de Configuração]{Layout da tabela de configuração}
+\vspace{3mm}
+\begin{tabular}{c|c}\hline
+\textbf{Nome do Campo} & \textbf{Tipo de Dados} \\ \hline
+login & TEXT \\ \hline
+senha & TEXT \\ \hline
+\end{tabular}
+\\ Fonte: elaboração do autor.
+\end{table}
+
+Como pode ser visto, é uma tabela simples que armazena as informações de login, sendo estas utilizadas no para o recebimento das informações atualizadas de dentro do sistema.
+
+\subsection{Tabela de Material de Apoio}
+A tabela de Material de apoio é extraida a partir do arquivo JSON de materiais transmitido pelo servidor, e é responsável por armazenar a lista de materiais para todas as disciplinas cursadas pelo acadêmico que está utilizando o aplicativo. Os campos e tipos de dados podem ser consultados na Tabela 14.
+
+\begin{table}[!hbt]
+\centering
+\caption[Aplicação - Tabela de Material de Apoio]{Layout da tabela de Material de Apoio}
+\vspace{3mm}
+\begin{tabular}{c|c}\hline
+\textbf{Nome do Campo} & \textbf{Tipo de Dados} \\ \hline
+nomeDisciplina         & TEXT                   \\ \hline
+publicacao             & TEXT                   \\ \hline 
+nome                   & TEXT                   \\ \hline
+descricao              & TEXT                   \\ \hline
+url                    & TEXT                   \\ \hline
+\end{tabular}
+\\ Fonte: elaboração do autor.
+\end{table}
+
+Devido a quantidade de colunas ser reduzida, as informações dos materiais de apoio foi a única que não foi dividida em duas tabelas, sendo possível manter sem problemas as informações em apenas uma tabela, não gerando grande duplicidade nas informações.
+
+\subsection{Tabela de Horários do Semestre}
+Com o objetivo de facilitar as consultas SQL executadas na base de dados e fornecer uma complexidade menor na leitura do código, o JSON de Horários do Semestre retornado pelo servidor é extraido em duas tabelas unidas por uma chave. Desta forma, a tabela de Horários do Semestre é responsável pelo armazenamento das disciplinas e seus detalhes. Na Tabela 15 pode-se observar a lista dos campos e seus respectivos tipos.
+
+\begin{table}[!hbt]
+\centering
+\caption[Aplicação - Tabela de Horários do Semestre]{Layout da tabela de Horários do Semestre}
+\vspace{3mm}
+\begin{tabular}{c|c}\hline
+\textbf{Nome do Campo} & \textbf{Tipo de Dados} \\ \hline
+codigo                 & TEXT                   \\ \hline
+turma                  & TEXT                   \\ \hline
+nome                   & TEXT                   \\ \hline
+curso                  & TEXT                   \\ \hline
+dataG2                 & TEXT                   \\ \hline
+dataG3                 & TEXT                   \\ \hline
+professor              & TEXT                   \\ \hline
+creditos               & INTEGER                \\ \hline
+turno                  & TEXT                   \\ \hline
+grade                  & INTEGER                \\ \hline
+periodo                & INTEGER                \\ \hline
+\end{tabular}
+\\ Fonte: elaboração do autor.
+\end{table}
+
+\subsection{Tabela de Horários do Semestre por Disciplina}
+Responsável por armazenar as informações dos horários das aulas e se as mesmas já ocorreram, esta tabela pode ser considerada uma extenção da tabela de Horários do Semestre, sendo ligada a mesma pelos campos código e turma. Na Tabela 16 são representados todos os campos da tabela e seus respectivos dados.
+
+\begin{table}[!hbt]
+\centering
+\caption[Aplicação - Tabela de Horários do Semestre por Disciplina]{Layout da tabela de Horários do Semestre por Disciplina}
+\vspace{3mm}
+\begin{tabular}{c|c}\hline
+\textbf{Nome do Campo} & \textbf{Tipo de Dados} \\ \hline
+codigo                 & TEXT                   \\ \hline
+turma                  & TEXT                   \\ \hline
+hora                   & TEXT                   \\ \hline
+diasemana              & TEXT                   \\ \hline
+data                   & TEXT                   \\ \hline
+ocorreu                & TEXT                   \\ \hline
+\end{tabular}
+\\ Fonte: elaboração do autor.
+\end{table}
+
+\subsection{Tabela de Notas da Graduação}
+Com o objetivo de facilitar as consultas SQL executadas na base de dados e fornecer uma complexidade menor na leitura do código, o JSON de Notas da Graduação retornado pelo servidor é extraido em duas tabelas unidas por uma chave. Desta forma, a tabela de Notas da Graduação é responsável pelo armazenamento das disciplinas e seus detalhes. Na Tabela 17 pode-se observar a lista dos campos e seus respectivos tipos.
+
+\begin{table}[!hbt]
+\centering
+\caption[Aplicação - Tabela de Notas da Graduação]{Layout da tabela de Notas da Graduação}
+\vspace{3mm}
+\begin{tabular}{c|c}\hline
+\textbf{Nome do Campo} & \textbf{Tipo de Dados} \\ \hline
+nome                   & TEXT                   \\ \hline
+notaG1                 & FLOAT                  \\ \hline
+notaG3                 & FLOAT                  \\ \hline
+notaG2                 & FLOAT                  \\ \hline
+mediaFinal             & FLOAT                  \\ \hline
+estadoMateria          & TEXT                   \\ \hline
+statusAcademico        & TEXT                   \\ \hline
+\end{tabular}
+\\ Fonte: elaboração do autor.
+\end{table}
+
+\subsection{Tabela de Avaliações}
+Responsável por armazenar as informações das avaliações já minstradas, esta tabela pode ser considerada uma extenção da tabela de Notas da Graduação, sendo ligada a mesma pelo campo nome. Na Tabela 18 são representados todos os campos da tabela e seus respectivos dados.
+
+\begin{table}[!hbt]
+\centering
+\caption[Aplicação - Tabela de Avaliações]{Layout da tabela de Avaliações}
+\vspace{3mm}
+\begin{tabular}{c|c}\hline
+\textbf{Nome do Campo} & \textbf{Tipo de Dados} \\ \hline
+nomeDisciplina         & TEXT                   \\ \hline
+peso                   & TEXT                   \\ \hline
+nota                   & FLOAT                  \\ \hline
+data                   & TEXT                   \\ \hline 
+nome                   & TEXT                   \\ \hline
+\end{tabular}
+\\ Fonte: elaboração do autor.
+\end{table}
+
+\section{Conexão ao Servidor e Extração dos Dados}
+A conexão com o servidor ocorre conforme explicado no item 5.4 deste trabalho, onde a partir de uma URL utilizando-se de um cliente HTTP para a conexão. Para o sincronismo das aplicações móveis, foi criado um servidor utilizando-se do endereço \url{http://minhaunomovel.no-ip.org}, sendo então necessário utilizar este endereço na montagem da URL de extração das informações. Os passos para conexão e extração dos dados estão representados no Algoritmo X.
+
+\emph{ALGORITMO DE EXTRAÇAO DAS INFORMAÇOES DEVE SER INSERIDO AQUI!!!!}
+
+O processo de conexão com o servidor e de extração de dados ocorrem em conjunto onde a partir da conexão, caso a informação buscada seja retornada é chamada a função de extração de dados, que efetua a conversão do JSON transmitido pelo servidor em um objeto JavaScript, e posteriormente extrai as informações e insere as mesmas na base de dados. Para melhor entendimento este item foi dividido em três subitens, cada um representando um módulo do sistema acadêmico.
+
+\subsection{Extração do Material de Apoio}
+Com o objetivo de extrair as informações do material de apoio enviadas pelo servidor, a extração ocorre conforme o Algoritmo X.
+
+\emph{O ALGORITMO VAI AQUI ANDREI!!!!!!!!}
+
+Com uma base simples de extração, após o arquivo JSON ser convertido para um objeto nativo JavaScript sua manipulação se da de forma extremamente simples, sendo que os vetores anteriormente representados no JSON agora são acessados tal qual sãos, e os objetos se tornam objetos realmente, sem necessidade de funções especiais para acessar seus dados. Desta forma no algoritmo acima as informações preenchidas no objeto JSON são acessadas sem utilização de funções especiais de acesso e inseridas diretamente na base de dados SQLite.
+
+\subsection{Extração das Notas da Graduação}
+Com o objetivo de extrair as informações das notas da graduação enviadas pelo servidor, a extração ocorre conforme o Algoritmo X.
+
+\emph{O ALGORITMO VAI AQUI ANDREI!!!!!!!!}
+
+Com uma base simples de extração, após o arquivo JSON ser convertido para um objeto nativo JavaScript sua manipulação se da de forma extremamente simples, sendo que os vetores anteriormente representados no JSON agora são acessados tal qual sãos, e os objetos se tornam objetos realmente, sem necessidade de funções especiais para acessar seus dados. Desta forma no algoritmo acima as informações preenchidas no objeto JSON são acessadas sem utilização de funções especiais de acesso e inseridas diretamente na base de dados SQLite.
+\subsection{Extração dos Horários do Semestre}
+Com o objetivo de extrair as informações dos horários do semestre enviadas pelo servidor, a extração ocorre conforme o Algoritmo X.
+
+\emph{O ALGORITMO VAI AQUI ANDREI!!!!!!!!}
+
+Com uma base simples de extração, após o arquivo JSON ser convertido para um objeto nativo JavaScript sua manipulação se da de forma extremamente simples, sendo que os vetores anteriormente representados no JSON agora são acessados tal qual sãos, e os objetos se tornam objetos realmente, sem necessidade de funções especiais para acessar seus dados. Desta forma no algoritmo acima as informações preenchidas no objeto JSON são acessadas sem utilização de funções especiais de acesso e inseridas diretamente na base de dados SQLite.
+\section{Login e Persistência das Informações}
+
+\section{Material de Apoio}
+
+\section{Notas da Graduação}
+
+\section{Horários do Semestre}
