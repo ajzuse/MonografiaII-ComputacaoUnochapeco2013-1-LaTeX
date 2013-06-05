@@ -1,11 +1,6 @@
 \chapter{Servidor}
 % Java - REST - JSON - JSOUP 
-% Anexo 1 = HTML disciplinas material de apoio
-% Anexo 2 = HTML material de apoio
-% Anexo 3 = HTML notas da graduação
-% Anexo 4 = HTML avaliações
-% Anexo 5 = HTML Horarios do Semestre
-% Anexo 6 = HTML Detalhes Horario Semestre
+
 Com o objetivo de extrair e preparar as informações a serem consumidas pela aplicação móvel do sistema acadêmico Minha Uno, foi desenvolvido em linguagem Java um servidor REST para facilitar e agilizar a extração dos dados. 
 
 Como no questionário apresentado anteriormente obtemos maior quantidade de respostas referentes aos acadêmicos de cursos de graduação, então para este trabalho foi escolhido implementar o servidor e posteriormente a aplicação para este público alvo, sendo implementados os módulos que apresentaram as três melhores notas, sendo eles Material de Apoio, Notas da Graduação e Horários do Semestre.
@@ -31,36 +26,28 @@ Com o objetivo de validar se o login fornecido pelo usuário na aplicação é v
 
 Utilizando-se do método POST do HTTP, os dados de login são enviados utilizando o endereço \url{https://www.unochapeco.edu.br/usuarios/login?login_submited=1&usuario=USUARIO&senha=SENHA&submit=entrar} (as palavras USUARIO e SENHA devem ser substituidas pelas respectivas informações).
 
-%\begin{algorithm}[H]
-% \SetAlgoLined
-% \KwData{Login e Senha do usuário}
-% \KwResult{Cookie de sessão da conexão e indicação de login válido}
+\begin{algorithm}
+\caption{Algoritmo para Validação do Login e Captura da Sessão}
+\label{alg:frw}
+\algsetup{indent=3em, linenodelimiter=.}
+\begin{algorithmic}[1]
+\REQUIRE Login e Senha do Usuário
+\ENSURE Resultado se as informações de login são válidas e Cookie de Sessão
 
-% \If{Não existe sessão armazenada}
-% {
-%  Obtém o identificador de sessão\;
-% }
- 
-% Validação da validade do login com base nos elementos retornados pela página\; 
- 
-%\caption{Validação de login e captura de sessão}
-%\end{algorithm}
+\STATE var $session$
+\STATE var $loginValido$
 
-%\begin{algorithm}
-%\caption{Validação de login e captura de Cookie}
-%\begin{algorithmic}[1]
+\STATE var $retornoServidor \gets Resultado da Consulta ao Servidor Minha Uno$
+\STATE $sessao \gets retornoServidor.cookie("PHPSESSID")$
+\IF{$retornoServidor = InformacaoValidaDeLogin$}
+    \STATE $loginValido \gets VERDADEIRO$
+\ELSE
+   \STATE $loginValido \gets FALSO$
+\ENDIF
 
-%$var session \gets null$
-
-%\Function{connect}{user, pass}
-%  \If {$session = vazio$}
-%    \State $session \gets identificador de sessão extraido utilizando jsoup$
-%  \EndIf
-  
-%  \State \Return Cookie da da sessão
-%\EndFunction
-%\end{algorithmic}
-%\end{algorithm}
+\RETURN loginValido
+\end{algorithmic}
+\end{algorithm}
 
 O algoritmo de extração do cookie e validação do login não apresenta nenhuma complexidade, conforme pode-se observar no Algoritmo 1. Para a exemplificação dos algoritmos neste capítulo não será adicionado código fonte em java, exibindo-se trechos de pseudo-código com relevância para este trabalho.
 
@@ -68,12 +55,11 @@ O algoritmo de extração do cookie e validação do login não apresenta nenhum
 \subsection{Material de Apoio}
 Com o objetivo de extrair a relação dos materiais eletrônicos postados pelos professores em cada disciplina cursada pelo acadêmico. Para melhor entendimento, o algoritmo será dividido em duas partes, sendo que a primeira parte mostrará como são extraidas as informações referentes as disciplinas cursadas pelo acadêmico, e a segunda parte do como são extraidas as informações dos materiais disponíveis.
 
-%Aqui ta o algoritmo q vc nunca acha Andrei!!!!
-%O Algoritmo 2 mostra como as informações dos materiais são extraidas, e o mesmo será detalhado nos itens 5.2.2.1 e 5.2.2.2.
+%O Algoritmo 2 mostra como as informações dos materiais de apoio são extraidas, e o mesmo será detalhado nos itens 5.2.2.1 e 5.2.2.2 deste trabalho.
 
 %%% Aqui é a subsubsessão de extração das disciplinas
 \subsubsection{Extração das Disciplinas}
-Com o objetivo de extrair a lista das disciplinas pertencentes ao módulo de material de apoio do sistema acadêmico, é necessário que a informação seja extraida a partir do código HTML retornado pela url \url{https://www.unochapeco.edu.br/saa/materialApoio.php}. Para a obtenção das disciplinas corretas cursadas pelo acadêmico, é utilizado o cookie de sessão capturado no momento do login, conforme explicado no item 5.2.1 deste trabalho. Um exemplo de código HTML retornado pelo servidor a partir deste tipo de consulta pode ser visto no anexo 1 deste trabalho.
+Com o objetivo de extrair a lista das disciplinas pertencentes ao módulo de material de apoio do sistema acadêmico, é necessário que a informação seja extraida a partir do código HTML retornado pela url \url{https://www.unochapeco.edu.br/saa/materialApoio.php}. Para a obtenção das disciplinas corretas cursadas pelo acadêmico, é utilizado o cookie de sessão capturado no momento do login, conforme explicado no item 5.2.1 deste trabalho. Um exemplo de código HTML retornado pelo servidor a partir deste tipo de consulta pode ser visto na url \url{https://gist.github.com/ajzuse/5703254/raw/2257edf4b1b7fb53cec0d5705ae454a5910217ff/materialapoio.html}.
 
 A partir do código HTML retornado, sendo aplicanda a expressão ``\emph{form tr td:eq(1) a}'' sob o mesmo por meio da biblioteca \emph{jsoup}, obtém-se como retorno a lista das disciplinas cursadas pelo acadêmico, conforme pode ser visto na figura 5.
 
@@ -92,7 +78,7 @@ Após a extração do nome da disciplina e da tag \emph{href}, é necessária a 
 \subsubsection{Extração dos Materiais}
 Após a extração da lista de disciplinas e da referência ao endereço web onde as disciplinas podem ser acessadas, é necessário extrair as informações dos materiais propriamente ditos.
 
-A partir do código HTML (disponível no anexo 2, sendo que o mesmo é pertencente a uma disciplina do 9º período de Ciência da Computação na grade 348) obtido pela url capturada (conforme explicado na sessão 5.2.2.1). No código retornado, existem 4 informações relevantes, sendo elas: nome, url, publicação e descrição.
+A partir do código HTML (disponível na url \url{https://gist.github.com/ajzuse/5703254/raw/1c124c120578cabda1dab410077cad5bb867ebbc/listamateriais.html}, sendo que o mesmo é pertencente a uma disciplina do 9º período de Ciência da Computação na grade 348) obtido pela url capturada (conforme explicado na sessão 5.2.2.1). No código retornado, existem 4 informações relevantes, sendo elas: nome, url, publicação e descrição.
 
 Para a extração do nome do material, a expressão ``\emph{form tr:contains(Arquivo) a}'', sendo que a mesma retorna uma lista com o nome das disciplinas, conforme pode ser visto na Figura 6.
 
@@ -131,7 +117,7 @@ Com o objetivo de de extrair as avaliações e as respectivas notas das avaliaç
 Assim como na sessão 5.2.2, será utilizada a biblioteca \emph{jsoup} para extração das informações, utilizando-se das mesmas recomendações da sessão mencionada anteriormente.
 
 \subsubsection{Extração das Disciplinas}
-Com o objetivo de extrair a lista das disciplinas pertencentes ao módulo de notas da graduação do sistema acadêmico, é necessário que a informação seja extraida a partir do código HTML retornado pela url \url{https://www.unochapeco.edu.br/saa/notas.php}. Para a obtenção das disciplinas corretas cursadas pelo acadêmico, é utilizado o cookie de sessão capturado no momento do login, conforme explicado no item 5.2.1 deste trabalho. Um exemplo de código HTML retornado pelo servidor a partir deste tipo de consulta pode ser visto no anexo 3 deste trabalho.
+Com o objetivo de extrair a lista das disciplinas pertencentes ao módulo de notas da graduação do sistema acadêmico, é necessário que a informação seja extraida a partir do código HTML retornado pela url \url{https://www.unochapeco.edu.br/saa/notas.php}. Para a obtenção das disciplinas corretas cursadas pelo acadêmico, é utilizado o cookie de sessão capturado no momento do login, conforme explicado no item 5.2.1 deste trabalho. Um exemplo de código HTML retornado pelo servidor a partir deste tipo de consulta pode ser visto na url \url{https://gist.github.com/ajzuse/5703254/raw/09fc387296dbe312ed7ec9232ddde838b20943fb/notasgraduacao.html}.
 
 A partir do código HTML retornado, sendo aplicanda a expressão ``\emph{form table:eq(0) tr td:eq(1) a}'' sob o mesmo por meio da biblioteca \emph{jsoup}, obtém-se como retorno a lista das disciplinas cursadas pelo acadêmico, conforme pode ser visto na figura 9.
 
@@ -145,7 +131,7 @@ A partir do código HTML retornado, sendo aplicanda a expressão ``\emph{form ta
 Como pode ser percebido na Figura 9, além do nome das disciplinas, na parte em vermelho que representa a tag HTML possui o atributo \emph{href}, sendo que o mesmo armazena o link para acesso as avaliações e notas da disciplina em específico, sendo este atributo importante para a a extração das notas e avaliações das disciplinas em aberto, sendo então necessário coletar o mesmo juntamente com o nome da disciplina. Após a extração do nome das disciplinas e da respectiva url a partir do atributo \emph{href}, é iniciada a extração das avaliações por disciplina.
 
 \subsubsection{Extração das Notas e Avaliações das Disciplinas em Aberto}
-Após a extração do nome das disciplinas cursadas pelo acadêmico e da url utilizada para acesso a disciplina específica, esta mesma url é utilizada para a extração das avaliações e notas do acadêmico, assim como também das médias do graduando. Para esta extração são utilizadas várias combinações de expressões. Um exemplo de código retornado pode ser consultado no anexo 4 deste trabalho.
+Após a extração do nome das disciplinas cursadas pelo acadêmico e da url utilizada para acesso a disciplina específica, esta mesma url é utilizada para a extração das avaliações e notas do acadêmico, assim como também das médias do graduando. Para esta extração são utilizadas várias combinações de expressões. Um exemplo de código retornado pode ser consultado na url \url{https://gist.github.com/ajzuse/5703254/raw/95df1ccd4a07589b60859044562450b986e314de/avaliacoes.html}.
 
 Para a extração da lista de avaliações, é utilizada a expressão \emph{form table:eq(0) tr:gt(4)} como base da extração, e posteriormente são aplicadas novas expressões sobre os resultados obtidos da aplicação da expressão base. A Figura 10 nos mostra parcialmente o retorno da expressão.
 
@@ -158,7 +144,7 @@ Para a extração da lista de avaliações, é utilizada a expressão \emph{form
 
 Como pode ser percebido na Figura 10, as informações aparecem um pouco misturadas, sendo necessário tratar via programação as informações que realmente serão extraidas e ignorando as informações que não são necessárias. Isto é feito por meio de uma verificação de quando a informação contida na quarta coluna da tabela retornada esta em branco ou contém a palavra notas.
 
-\textbf{AQUI VAI O ALGORITMO DE EXTRAÇAO DAS AVALIAÇOES E NOTAS DAS DISCIPLINAS!!!!!!}
+%\textbf{AQUI VAI O ALGORITMO DE EXTRAÇAO DAS AVALIAÇOES E NOTAS DAS DISCIPLINAS!!!!!!}
 
 A partir do retorno acima, são extraidas as seguintes informações das avaliações: nome, peso, data e nota. Cada uma destas informações possui uma expressão aplicada sobre a expressão base. A Tabela 7 contém a expressão para cada informação e a ser extraida.
 
@@ -193,7 +179,7 @@ Média de G2 & form table:eq(0) tr:contains(Média de G2) td:eq(1)\\ \hline
 Após estes procedimentos a extração das avaliações, assim como das médias de G1 e G2 estão concluídas, faltando apenas a extração das notas para as disciplinas já finalizadas pelo acadêmico no semestre.
 
 \subsubsection{Extração das Notas das Disciplilas Finalizadas}
-Finalizando a sessão de extração das notas da graduação, a extração das notas das disciplinas já finalizadas ocorre em cima do mesmo código HTML obtido no item 5.2.3.1 deste trabalho, que pode ser consultado no anexo 3.
+Finalizando a sessão de extração das notas da graduação, a extração das notas das disciplinas já finalizadas ocorre em cima do mesmo código HTML obtido no item 5.2.3.1 deste trabalho, que pode ser consultado na url \url{https://gist.github.com/ajzuse/5703254/raw/09fc387296dbe312ed7ec9232ddde838b20943fb/notasgraduacao.html}.
 
 Devido a ordem em que as disciplinas são exibididas na lista de disciplinas ser diferente a ordem exibida nas notas oficiais da graduação, a expressão utilizada para a busca das notas de disciplinas já finalizadas leva em consideração o código da disciplina encerrada, extraindo o mesmo a partir do atributo href da tag html retornada na lista de disciplinas. Para o retorno das informações da disciplina já finalizada, é utilizada a expressão \emph{form[name\$=graduacao] tr:contains(CODIGODISCIPLINA)}, sendo que a palavra CODIGODISCIPLINA deve ser substituida pelo código propriamente dito.
 
@@ -201,7 +187,7 @@ Devido a ordem em que as disciplinas são exibididas na lista de disciplinas ser
 Com o objetivo de extrair o horário das disciplinas cursadas pelo acadêmico, e também as informações detalhadas da disciplina, foi desenvolvida a classe de extração dos horários do semestre. Para facilitar o entendimento, a explicação do processo será dividido em três partes, sendo elas: Extração do nome das disciplinas, Extração das informações gerais da disciplina e Extração dos Horários de Aula.
 
 \subsubsection{Extração das Disciplinas}
-Com o objetivo de extrair a lista das disciplinas pertencentes ao módulo de horários do semestre do sistema acadêmico, é necessário que a informação seja extraida a partir do código HTML retornado pela url \url{https://www.unochapeco.edu.br/saa/hor_aluno.php}. Para a obtenção das disciplinas corretas cursadas pelo acadêmico, é utilizado o cookie de sessão capturado no momento do login, conforme explicado no item 5.2.1 deste trabalho. Um exemplo de código HTML retornado pelo servidor a partir deste tipo de consulta pode ser visto no Anexo 5 deste trabalho.
+Com o objetivo de extrair a lista das disciplinas pertencentes ao módulo de horários do semestre do sistema acadêmico, é necessário que a informação seja extraida a partir do código HTML retornado pela url \url{https://www.unochapeco.edu.br/saa/hor_aluno.php}. Para a obtenção das disciplinas corretas cursadas pelo acadêmico, é utilizado o cookie de sessão capturado no momento do login, conforme explicado no item 5.2.1 deste trabalho. Um exemplo de código HTML retornado pelo servidor a partir deste tipo de consulta pode ser visto na url \url{https://gist.github.com/ajzuse/5703254/raw/d9629078416b6f5b7be2feb6228d26767d2f4541/horariossemestre.html}.
 
 A partir do código HTML retornado, utilizando-se das expressões exibidas na Tabela 9 são extraidas as informações de código, nome e turma da disciplina.
 
@@ -218,14 +204,14 @@ Turma           & form tr:gt(1) td:eq(2) a \\ \hline
 \\ Fonte: elaboração do autor.
 \end{table}
 
-\textbf{VERIFICAR COM O MC SE DEVEM SER COLOCADAS IMAGENS AQUI!!!}
+%\textbf{VERIFICAR COM O MC SE DEVEM SER COLOCADAS IMAGENS AQUI!!!}
 
 Como ocorre na extrações anteriores, é necessário extrair da tag HTML retornada o atributo \emph{href} para serem extraidas tanto as informações gerais como os horários de aula da disciplina.
 
 Após terminada a extração das disciplinas, e possuindo a url armazenada no atributo \emph{href}, agora são extraidas as informações gerais das disciplinas e também os horários de aula.
 
 \subsubsection{Extração das Informações Gerais}
-A extração das Informações gerais ocorre a partir da url extraida da disciplina como visto no item 5.2.4.1 deste trabalho. Para a extração das informarmações é necessária uma expressão para cada informação, sendo demonstradas as expressões na tabela 10. O código HTML retornado pela página do sistema acadêmico para uma disciplina de exemplo pode ser consultado no Anexo 6 deste trabalho.
+A extração das Informações gerais ocorre a partir da url extraida da disciplina como visto no item 5.2.4.1 deste trabalho. Para a extração das informarmações é necessária uma expressão para cada informação, sendo demonstradas as expressões na tabela 10. O código HTML retornado pela página do sistema acadêmico para uma disciplina de exemplo pode ser consultado na url \url{https://gist.github.com/ajzuse/5703254/raw/a2475d20fe22b9255e74bf6b464712a96ea5179f/horariossemestredetalhes.html}.
 
 \begin{table}[!hbt]
 \centering
@@ -246,7 +232,7 @@ Data da G3      & form tr[bgcolor]:contains(g3) td:eq(1)         \\ \hline
 \\ Fonte: elaboração do autor.
 \end{table}
 
-\textbf{VERIFICAR COM O MC SE DEVEM SER COLOCADAS IMAGENS COM OS DETALHES EXTRAIDOS AQUI!!!!}
+%\textbf{VERIFICAR COM O MC SE DEVEM SER COLOCADAS IMAGENS COM OS DETALHES EXTRAIDOS AQUI!!!!}
 
 A partir de cada uma das expressões presentes na Tabela 10, obtemos cada uma das informações que fazem parte dos detalhes da disciplina cursada pelo acadêmico, e desta forma encerramos a extração dos detalhes, iniciando a extração dos horários de aula explicada no item 5.2.4.3.
 

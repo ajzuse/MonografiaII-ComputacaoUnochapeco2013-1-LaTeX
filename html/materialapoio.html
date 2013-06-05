@@ -1,0 +1,160 @@
+
+<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+	<DIV ID="waitDiv" style="position:absolute;left:200;top:200;visibility:hidden">
+		<center>
+		<table cellpadding=6 border=2 bgcolor=#ffffff bordercolor=#999999>
+		<tr>
+			<td align=center>
+				</center>
+				<center>
+				<font color="#004080" face="Verdana, Arial, Helvetica, sans-serif" size="4">
+				<b>Carregando...</b></font><br>
+				<img src="/saa/images/await.gif" border="0"></center><br>
+				<font color="#004080" face="Verdana, Arial, Helvetica, sans-serif" size="2">Aguarde um instante...</font>
+			</td>
+		</tr>
+		</table>
+		</center>
+	</DIV>	
+<script language="javascript">
+//Timer
+var TimerID=0;
+var delay=3200000;
+clearTimeout(TimerID);
+TimerID = setTimeout("window.open('https://www.unochapeco.edu.br/saa/logout.php','_parent')",delay);
+
+//Carregamento
+var DHTML = (document.getElementById || document.all || document.layers);
+function ap_getObj(name) {
+    if (document.getElementById) {
+    	return document.getElementById(name).style;
+	}
+	else if (document.all) {
+		return document.all[name].style;
+	}
+	else if (document.layers) {
+		return document.layers[name];
+	}
+}
+function ap_showWaitMessage(div,flag)  {
+	if (!DHTML)
+		return;
+	var x = ap_getObj(div);
+	x.visibility = (flag) ? 'visible':'hidden'
+	if(! document.getElementById) {
+		if(document.layers) {
+			x.left=280/2;
+			return true;
+		}
+	}
+}
+ap_showWaitMessage('waitDiv', 1);
+
+
+
+</script>
+<link rel="Stylesheet" type="text/css" href="/saa/include/css.css">
+<BODY bgColor="#FFFFFF">
+<p>&nbsp;</p>
+<center>
+<table border="0">
+<tr>
+	<td align="left">
+		<table BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%" background="/saa/images/pobtrans.gif">
+		<tr>
+			<td COLSPAN="3" WIDTH="100%"><img SRC="/saa/images/pobtrans.gif" BORDER="0" HEIGHT="4"></td>
+		</tr>
+		<tr>
+			<td WIDTH="4"><img SRC="/saa/images/pobtrans.gif" BORDER="0" HEIGHT="1" WIDTH="4"></td>
+			<td vAlign="top" width="600">
+				<table BORDER="0" class="PortletHeaderColor" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
+				<tr class="PortletHeaderColor">
+					<td class="LeftCurve" valign="top" width="10" height="10" NOWRAP>&nbsp;&nbsp;&nbsp;</td>
+					<td class="PortletHeaderColor" NOWRAP="" valign="top"><font class="PortletHeaderText">Materiais de Apoio</font>&nbsp;</td>
+					<td class="RightCurve" width="10" NOWRAP>&nbsp;&nbsp;</td>
+					<td class="PageColor" align="right" NOWRAP="" valign="top" width="100%">&nbsp;</td>
+				</tr>
+				</table>
+				<table BORDER="1" WIDTH="100%" CELLPADDING="2" CELLSPACING="0" class="RegionBorder">
+				<tr>
+										<td bgcolor="#eeeeee" WIDTH="100%" DIR="LTR">
+                        						<table width ="99%">
+						<tr>
+							<td>
+								<table border="0" cellspacing="0" cellpadding="0" width="100%">
+								<tr>
+									<td colspan="2"><font class="PortletText1">
+        <form name="matApoio" action="/saa/materialApoio.php" method="post" enctype="multipart/form-data">
+        <TABLE border=0 width="100%">
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+
+    <tr bgcolor="#9caece">
+        <td align="center"><font size="2" color="#000000">&nbsp;<b>Matriz</b>&nbsp;</font></td>
+        <td align="center"><font size="2" color="#000000">&nbsp;<b>Componente Curricular</b>&nbsp;</font></td>
+        <td align="center"><font size="2" color="#000000">&nbsp;<b>Turma</b>&nbsp;</font></td>
+    </tr>
+    
+            <tr bgcolor="#cecf9c">
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=1030292&codgrade=348&codturma=A">348</a></b>&nbsp;</font></td>
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=1030292&codgrade=348&codturma=A">1030292 - INFORMÁTICA E SOCIEDADE</a></b>&nbsp;</font></td>
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=1030292&codgrade=348&codturma=A">A</a></b>&nbsp;</font></td>
+            </tr>
+            <tr bgcolor="#efefde">
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=1030293&codgrade=348&codturma=D">348</a></b>&nbsp;</font></td>
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=1030293&codgrade=348&codturma=D">1030293 - MONOGRAFIA II</a></b>&nbsp;</font></td>
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=1030293&codgrade=348&codturma=D">D</a></b>&nbsp;</font></td>
+            </tr>
+            <tr bgcolor="#cecf9c">
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=1030294&codgrade=348&codturma=A">348</a></b>&nbsp;</font></td>
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=1030294&codgrade=348&codturma=A">1030294 - FUNDAMENTOS DE COMPUTAÇÃO GRÁFICA</a></b>&nbsp;</font></td>
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=1030294&codgrade=348&codturma=A">A</a></b>&nbsp;</font></td>
+            </tr>
+            <tr bgcolor="#efefde">
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=1030296&codgrade=348&codturma=A">348</a></b>&nbsp;</font></td>
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=1030296&codgrade=348&codturma=A">1030296 - GERÊNCIA DE REDES (Optativo)</a></b>&nbsp;</font></td>
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=1030296&codgrade=348&codturma=A">A</a></b>&nbsp;</font></td>
+            </tr>
+            <tr bgcolor="#cecf9c">
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=1030302&codgrade=348&codturma=A">348</a></b>&nbsp;</font></td>
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=1030302&codgrade=348&codturma=A">1030302 - TÓPICOS EM GESTÃO DA TECNOLOGIA DA INFORMAÇÃO (Optativo)</a></b>&nbsp;</font></td>
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=1030302&codgrade=348&codturma=A">A</a></b>&nbsp;</font></td>
+            </tr>
+            <tr bgcolor="#efefde">
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=6020909&codgrade=348&codturma=A">348</a></b>&nbsp;</font></td>
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=6020909&codgrade=348&codturma=A">6020909 - TÓPICOS EM ECONOMIA E FINANÇAS</a></b>&nbsp;</font></td>
+                <td align="center"><font size="2" color="#000000">&nbsp;<b><a title="Cursando em 2013/1" href="/saa/materialApoio.php?op=disc&coddisc=6020909&codgrade=348&codturma=A">A</a></b>&nbsp;</font></td>
+            </tr>
+        <tr><td>&nbsp;</td></tr>    
+    </table></font></td>
+								</tr>
+								<tr>
+									<td colspan="2"><font class="PortletText1">
+        <table border=0 width="100%">
+        <tr>
+            <td align="center"><a href="centro.php">Voltar</a></td>
+            <td align="center"><a href="logout.php">Sair</a></td>
+        </tr>
+        </table></font></td>
+								</tr>
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>	
+</center>
+<script language="javascript">
+    ap_showWaitMessage('waitDiv', 0);
+</script>
+
+</body>
+</html>

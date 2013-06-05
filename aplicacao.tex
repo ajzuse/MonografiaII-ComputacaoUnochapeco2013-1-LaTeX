@@ -135,27 +135,27 @@ nome                   & TEXT                   \\ \hline
 \section{Conexão ao Servidor e Extração dos Dados}
 A conexão com o servidor ocorre conforme explicado no item 5.4 deste trabalho, onde a partir de uma URL utilizando-se de um cliente HTTP para a conexão. Para o sincronismo das aplicações móveis, foi criado um servidor utilizando-se do endereço \url{http://minhaunomovel.no-ip.org}, sendo então necessário utilizar este endereço na montagem da URL de extração das informações. Os passos para conexão e extração dos dados estão representados no Algoritmo X.
 
-\emph{ALGORITMO DE EXTRAÇAO DAS INFORMAÇOES DEVE SER INSERIDO AQUI!!!!}
+%\emph{ALGORITMO DE EXTRAÇAO DAS INFORMAÇOES DEVE SER INSERIDO AQUI!!!!}
 
 O processo de conexão com o servidor e de extração de dados ocorrem em conjunto onde a partir da conexão, caso a informação buscada seja retornada é chamada a função de extração de dados, que efetua a conversão do JSON transmitido pelo servidor em um objeto JavaScript, e posteriormente extrai as informações e insere as mesmas na base de dados. Para melhor entendimento este item foi dividido em três subitens, cada um representando um módulo do sistema acadêmico.
 
 \subsection{Extração do Material de Apoio}
 Com o objetivo de extrair as informações do material de apoio enviadas pelo servidor, a extração ocorre conforme o Algoritmo X.
 
-\emph{O ALGORITMO VAI AQUI ANDREI!!!!!!!!}
+%\emph{O ALGORITMO VAI AQUI ANDREI!!!!!!!!}
 
 Com uma base simples de extração, após o arquivo JSON ser convertido para um objeto nativo JavaScript sua manipulação se da de forma extremamente simples, sendo que os vetores anteriormente representados no JSON agora são acessados tal qual sãos, e os objetos se tornam objetos realmente, sem necessidade de funções especiais para acessar seus dados. Desta forma no algoritmo acima as informações preenchidas no objeto JSON são acessadas sem utilização de funções especiais de acesso e inseridas diretamente na base de dados SQLite.
 
 \subsection{Extração das Notas da Graduação}
 Com o objetivo de extrair as informações das notas da graduação enviadas pelo servidor, a extração ocorre conforme o Algoritmo X.
 
-\emph{O ALGORITMO VAI AQUI ANDREI!!!!!!!!}
+%\emph{O ALGORITMO VAI AQUI ANDREI!!!!!!!!}
 
 Com uma base simples de extração, após o arquivo JSON ser convertido para um objeto nativo JavaScript sua manipulação se da de forma extremamente simples, sendo que os vetores anteriormente representados no JSON agora são acessados tal qual sãos, e os objetos se tornam objetos realmente, sem necessidade de funções especiais para acessar seus dados. Desta forma no algoritmo acima as informações preenchidas no objeto JSON são acessadas sem utilização de funções especiais de acesso e inseridas diretamente na base de dados SQLite.
 \subsection{Extração dos Horários do Semestre}
 Com o objetivo de extrair as informações dos horários do semestre enviadas pelo servidor, a extração ocorre conforme o Algoritmo X.
 
-\emph{O ALGORITMO VAI AQUI ANDREI!!!!!!!!}
+%\emph{O ALGORITMO VAI AQUI ANDREI!!!!!!!!}
 
 Com uma base simples de extração, após o arquivo JSON ser convertido para um objeto nativo JavaScript sua manipulação se da de forma extremamente simples, sendo que os vetores anteriormente representados no JSON agora são acessados tal qual sãos, e os objetos se tornam objetos realmente, sem necessidade de funções especiais para acessar seus dados. Desta forma no algoritmo acima as informações preenchidas no objeto JSON são acessadas sem utilização de funções especiais de acesso e inseridas diretamente na base de dados SQLite.
 
