@@ -133,34 +133,18 @@ nome                   & TEXT                   \\ \hline
 \end{table}
 
 \section{Conexão ao Servidor e Extração dos Dados}
-A conexão com o servidor ocorre conforme explicado no item 5.4 deste trabalho, onde a partir de uma URL utilizando-se de um cliente HTTP para a conexão. Para o sincronismo das aplicações móveis, foi criado um servidor utilizando-se do endereço \url{http://minhaunomovel.no-ip.org}, sendo então necessário utilizar este endereço na montagem da URL de extração das informações. Os passos para conexão e extração dos dados estão representados no Algoritmo X.
+A conexão com o servidor ocorre conforme explicado no item 5.4 deste trabalho, onde a partir de uma URL utilizando-se de um cliente HTTP para a conexão. Para o sincronismo das aplicações móveis, foi criado um servidor utilizando-se do endereço \url{http://minhaunomovel.no-ip.org}, sendo então necessário utilizar este endereço na montagem da URL de extração das informações. Os passos para conexão e extração dos dados estão representados no \emph{Apêndice B.1}.
 
-%\emph{ALGORITMO DE EXTRAÇAO DAS INFORMAÇOES DEVE SER INSERIDO AQUI!!!!}
+O processo de conexão com o servidor e de extração de dados ocorrem em conjunto onde a partir da conexão, caso a informação buscada seja retornada é chamada a função de extração de dados, que efetua a conversão do JSON transmitido pelo servidor em um objeto JavaScript, e posteriormente extrai as informações e insere as mesmas na base de dados. 
 
-O processo de conexão com o servidor e de extração de dados ocorrem em conjunto onde a partir da conexão, caso a informação buscada seja retornada é chamada a função de extração de dados, que efetua a conversão do JSON transmitido pelo servidor em um objeto JavaScript, e posteriormente extrai as informações e insere as mesmas na base de dados. Para melhor entendimento este item foi dividido em três subitens, cada um representando um módulo do sistema acadêmico.
-
-\subsection{Extração do Material de Apoio}
-Com o objetivo de extrair as informações do material de apoio enviadas pelo servidor, a extração ocorre conforme o Algoritmo X.
-
-%\emph{O ALGORITMO VAI AQUI ANDREI!!!!!!!!}
-
-Com uma base simples de extração, após o arquivo JSON ser convertido para um objeto nativo JavaScript sua manipulação se da de forma extremamente simples, sendo que os vetores anteriormente representados no JSON agora são acessados tal qual sãos, e os objetos se tornam objetos realmente, sem necessidade de funções especiais para acessar seus dados. Desta forma no algoritmo acima as informações preenchidas no objeto JSON são acessadas sem utilização de funções especiais de acesso e inseridas diretamente na base de dados SQLite.
-
-\subsection{Extração das Notas da Graduação}
-Com o objetivo de extrair as informações das notas da graduação enviadas pelo servidor, a extração ocorre conforme o Algoritmo X.
-
-%\emph{O ALGORITMO VAI AQUI ANDREI!!!!!!!!}
-
-Com uma base simples de extração, após o arquivo JSON ser convertido para um objeto nativo JavaScript sua manipulação se da de forma extremamente simples, sendo que os vetores anteriormente representados no JSON agora são acessados tal qual sãos, e os objetos se tornam objetos realmente, sem necessidade de funções especiais para acessar seus dados. Desta forma no algoritmo acima as informações preenchidas no objeto JSON são acessadas sem utilização de funções especiais de acesso e inseridas diretamente na base de dados SQLite.
-\subsection{Extração dos Horários do Semestre}
-Com o objetivo de extrair as informações dos horários do semestre enviadas pelo servidor, a extração ocorre conforme o Algoritmo X.
-
-%\emph{O ALGORITMO VAI AQUI ANDREI!!!!!!!!}
-
-Com uma base simples de extração, após o arquivo JSON ser convertido para um objeto nativo JavaScript sua manipulação se da de forma extremamente simples, sendo que os vetores anteriormente representados no JSON agora são acessados tal qual sãos, e os objetos se tornam objetos realmente, sem necessidade de funções especiais para acessar seus dados. Desta forma no algoritmo acima as informações preenchidas no objeto JSON são acessadas sem utilização de funções especiais de acesso e inseridas diretamente na base de dados SQLite.
+Após o recebimento do arquivo JSON referente ao módulo do sistema a ser extraido, o arquivo JSON é convertido para um objeto nativo JavaScript, sendo que sua manipulação se da de forma extremamente simples, onde os vetores anteriormente representados no JSON agora são acessados como vetores da linguagem, e os objetos se tornam objetos realmente, sem necessidade de funções especiais para acessar seus dados. Desta forma, conforme pode ser visto no \emph{Apêndice B.1} as informações preenchidas no objeto JSON são acessadas sem utilização de funções especiais de acesso e inseridas diretamente na base de dados SQLite.
 
 \section{Login e Persistência das Informações}
 Sendo o formulário de entrada do sistema, o formulário de login é a ``porta de entrada'' do acadêmico, sendo por meio deste feito a validação dos dados de login, e posteriormente o recebimento das informações. Na Figura 12 pode ser vista a interface deste formulário.
+
+Com o objetivo de ser um formulário simples, foi pensado em uma interface limpa, apenas com as informações necessárias. Desta forma o layout a cima foi o escolhido, apenas com os campos de usuário e senha, a logo da instituição e um botão de login.
+
+Após inseridas as informações, no momento que é acionado o botão de login, a aplicação conecta-se com o servidor e recebe os dados do acadêmico. Também neste momento as informações de login e senha são armazenadas na tabela de configuração, sendo que exceto quando o usuário efetua logout (opção sair do menu principal da apliçação), o formulário de login não é mais exibido ao usuário, sendo feito o login de forma automática.
 
 \begin{figure}[!htb]
      \centering
@@ -169,20 +153,10 @@ Sendo o formulário de entrada do sistema, o formulário de login é a ``porta d
      \\  Fonte: Do Autor.
 \end{figure}
 
-Com o objetivo de ser um formulário simples, foi pensado em uma interface limpa, apenas com as informações necessárias. Desta forma o layout a cima foi o escolhido, apenas com os campos de usuário e senha, a logo da instituição e um botão de login. Após a entrada das informações, o resultado obtido é mostrado na Figura 13.
-
-\begin{figure}[!htb]
-     \centering
-     \caption[Formulário de Login - Interface com Informações]{Interface do Formulário de Login com informações preenchidas.}
-     \includegraphics[scale=0.34]{imagens/formlogincomdados.png}
-     \\  Fonte: Do Autor.
-\end{figure}
-\newpage
-
-Após inseridas as informações, no momento que é acionado o botão de login, a aplicação conecta-se com o servidor e recebe os dados do acadêmico. Também neste momento as informações de login e senha são armazenadas na tabela de configuração, sendo que exceto quando o usuário efetua logout (opção sair do menu principal da apliçação), o formulário de login não é mais exibido ao usuário, sendo efetuado o login automático.
+A implementação deste formulário pode ser consultada no \emph{Apêndice B.2}.
 
 \section{Formulário Principal}
-Sendo o menu principal da aplicação o formulário principal é a tela de escolha do usuário, onde o mesmo pode acessar os outros menus da aplicação. Seguindo a idéia de simplicidade proposta, utiliza-se de uma lista de opções possuindo acima desta lista a logo da instituição, como pode ser visto na Figura 14.
+Sendo o menu principal da aplicação o formulário principal é a tela de escolha do usuário, onde o mesmo pode acessar os outros menus da aplicação. Seguindo a idéia de simplicidade proposta, utiliza-se de uma lista de opções possuindo acima desta lista a logo da instituição, como pode ser visto na Figura 13.
 
 \begin{figure}[!htb]
      \centering
@@ -191,11 +165,11 @@ Sendo o menu principal da aplicação o formulário principal é a tela de escol
      \\  Fonte: Do Autor.
 \end{figure}
 
-A partir do formulário principal, o usuário pode ser levado para qualquer formulário da aplicação. A opção ``Sobre'' exibe um alerta mostrando mais informações sobre a apliçação, conforme pode ser visto na Figura 15.
+A partir do formulário principal, o usuário pode ser levado para qualquer formulário da aplicação. A opção ``Sobre'' exibe um alerta mostrando mais informações sobre a apliçação, conforme pode ser visto na Figura 14.
 
 \begin{figure}[!htb]
      \centering
-     \caption[Formulário Principal - Interface]{Interface do Formulário Principal do Aplicativo.}
+     \caption[Formulário Principal - Sobre]{Informações sobre o Aplicativo.}
      \includegraphics[scale=0.34]{imagens/formsobre.png}
      \\  Fonte: Do Autor.
 \end{figure}
@@ -203,8 +177,11 @@ A partir do formulário principal, o usuário pode ser levado para qualquer form
 
 A opção ``Atualizar'' exibida no menu principal é utilizada pelo usuário para receber novos dados do servidor, sendo assim atualizadas as informações armazenadas no dispositivo. Já a opção ``Sair'' é utilizada para fazer logout do sistema, excluindo as informações armazenadas na base de dados do aplicativo e retornando ao formulário de login.
 
+A implementação deste formulário pode ser consultada no \emph{Apêndice B.3}.
+
+
 \section{Material de Apoio}
-Desenvolvido com o objetivo de permitir a consulta da lista de materiais de apoio das disciplinas, e também permitir visualizar o material (desde que haja suporte pelo dispositivo para visualização do material disponibilizado). Na Figura 16 é possível visualizar o layout da interface gráfica do módulo.
+Desenvolvido com o objetivo de permitir a consulta da lista de materiais de apoio das disciplinas, e também permitir visualizar o material (desde que haja suporte pelo dispositivo para visualização do material disponibilizado). Na Figura 15 é possível visualizar o layout da interface gráfica do módulo.
 
 \begin{figure}[!htb]
      \centering
@@ -213,7 +190,7 @@ Desenvolvido com o objetivo de permitir a consulta da lista de materiais de apoi
      \\  Fonte: Do Autor.
 \end{figure}
 
-Ao ser selecionada alguma disciplina, a lista dos materiais da mesma é exibida. Para a Figura 17 foi selecionada a disciplina de Informática e Sociedade, carregando assim a lista de materiais da mesma.
+Ao ser selecionada alguma disciplina, a lista dos materiais da mesma é exibida. Para a Figura 16 foi selecionada a disciplina de Informática e Sociedade, carregando assim a lista de materiais da mesma.
 
 \begin{figure}[!htb]
      \centering
@@ -223,7 +200,7 @@ Ao ser selecionada alguma disciplina, a lista dos materiais da mesma é exibida.
 \end{figure}
 \newpage
 
-Ao se escolher uma disciplina, o navegador do dispositivo é chamado, para abrir o material escolhido pelo usuário. Neste ponto é solicitado o login do acadêmico no sistema acadêmico pelo browser, pois não possuímos acesso a sessão em que o arquivo foi extraido no servidor. Após o login, material é exibido, conforme Figura 18.
+Ao se escolher uma disciplina, o navegador do dispositivo é chamado, para abrir o material escolhido pelo usuário. Neste ponto é solicitado o login do acadêmico no sistema acadêmico pelo browser, pois não possuímos acesso a sessão em que o arquivo foi extraido no servidor. Após o login, material é exibido, conforme Figura 17.
 
 \begin{figure}[!htb]
      \centering
@@ -233,8 +210,10 @@ Ao se escolher uma disciplina, o navegador do dispositivo é chamado, para abrir
 \end{figure}
 \newpage
 
+A implementação dos formulários de exibição das disciplinas e dos materiais podem ser consultados nos Apêndices \emph{B.4} e \emph{B.5}.
+
 \section{Notas da Graduação}
-O formulário de Notas da Graduação é a interface do usuário para visualização, a partir das disciplinas cursadas pelo mesmo, visualizar suas médias e suas notas por avaliação. Sua interface incial, assim como os outros formulários de consulta, consiste na lista das disciplinas cursadas pelo acadêmico, conforme Figura 19.
+O formulário de Notas da Graduação é a interface do usuário para visualização, a partir das disciplinas cursadas pelo mesmo, visualizar suas médias e suas notas por avaliação. Sua interface incial, assim como os outros formulários de consulta, consiste na lista das disciplinas cursadas pelo acadêmico, conforme Figura 18.
 
 \begin{figure}[!htb]
      \centering
@@ -244,7 +223,7 @@ O formulário de Notas da Graduação é a interface do usuário para visualiza�
 \end{figure}
 \newpage
 
-Ao selecionar uma disciplina, é apresentada uma tela com as médias do acadêmico. Caso a disciplina esteja aberta, a tela exibida é semelhante a visualizada na Figura 20. Já caso a disciplina ainda esteja aberta, a imagem exibida é semelhante a Figura 21, exibindo o botão detalhes para a consulta das avaliações feitas pelo acadêmico.
+Ao selecionar uma disciplina, é apresentada uma tela com as médias do acadêmico. Caso a disciplina esteja aberta, a tela exibida é semelhante a visualizada na Figura 19. Já caso a disciplina ainda esteja aberta, a imagem exibida é semelhante a Figura 20, exibindo o botão detalhes para a consulta das avaliações feitas pelo acadêmico.
 
 \begin{figure}[!htb]
      \centering
@@ -260,7 +239,7 @@ Ao selecionar uma disciplina, é apresentada uma tela com as médias do acadêmi
 \end{figure}
 \newpage
 
-Em caso de disciplina em aberto, onde o botão ``Detalhes'' é exibido, ao ser escolhio pelo usuário é exibida a tela de avaliações, que mostra as informações referentes as avaliações, caso as mesmas existam (Figura 22), ou é exibida uma mensagem informando que não existem avaliações (Figura 23).
+Em caso de disciplina em aberto, onde o botão ``Detalhes'' é exibido, ao ser escolhio pelo usuário é exibida a tela de avaliações, que mostra as informações referentes as avaliações, caso as mesmas existam (Figura 21), ou é exibida uma mensagem informando que não existem avaliações (Figura 22).
 
 \begin{figure}[!htb]
      \centering
@@ -274,20 +253,19 @@ Em caso de disciplina em aberto, onde o botão ``Detalhes'' é exibido, ao ser e
      \includegraphics[scale=0.34]{imagens/alertanaoexistemavaliacoes.png}
      \\  Fonte: Do Autor.
 \end{figure}
-\newpage
 
+A implementação dos formulários de exibição das disciplinas e das avaliações podem ser consultados nos Apêndices \emph{B.6} e \emph{B.7}.
 
 \section{Horários do Semestre}
-O formulário de horários do semestre exibe tanto informações detalhadas sobre a disciplina cursada pelo acadêmico como também os dias de aula da disciplina. Ao ser acessado, assim como os outros formulários, é exibida a lista das disciplinas cursadas, conforme mostrado na Figura 24.
+O formulário de horários do semestre exibe tanto informações detalhadas sobre a disciplina cursada pelo acadêmico como também os dias de aula da disciplina. Ao ser acessado, assim como os outros formulários, é exibida a lista das disciplinas cursadas, conforme mostrado na Figura 23.
 \begin{figure}[!htb]
      \centering
      \caption[Formulário Horários do Semestre - Lista das Disciplinas]{Visualização do Formulário de Horários do Semestre.}
      \includegraphics[scale=0.34]{imagens/formhorariosemestre.png}
      \\  Fonte: Do Autor.
 \end{figure}
-\newpage
 
-Ao selecionar uma disciplina na lista apresentada, é exibido ao acadêmico um alerta com as informações da disciplina (Figura 25) e também um botão detalhes, que exibe a lista completa de datas e horários de aula da disciplina escolhida (Figura 26).
+Ao selecionar uma disciplina na lista apresentada, é exibido ao acadêmico um alerta com as informações da disciplina (Figura 24) e também um botão detalhes, que exibe a lista completa de datas e horários de aula da disciplina escolhida (Figura 25).
 
 \begin{figure}[!htb]
      \centering
@@ -303,4 +281,8 @@ Ao selecionar uma disciplina na lista apresentada, é exibido ao acadêmico um a
 \end{figure}
 \newpage
 
-Conforme pode ser visto na Figura 26, o último registro é exibido em destaque. Isto significa que a aquela aula ainda não foi realizada, assim como ocorre no sistema acadêmico Minha Uno.
+Conforme pode ser visto na Figura 25, o último registro é exibido em destaque. Isto significa que a aquela aula ainda não foi realizada, assim como ocorre no sistema acadêmico Minha Uno.
+
+A implementação dos formulários de exibição das disciplinas e dos horários podem ser consultados nos Apêndices \emph{B.8} e \emph{B.9}.
+
+\section{Execução no Google Android}

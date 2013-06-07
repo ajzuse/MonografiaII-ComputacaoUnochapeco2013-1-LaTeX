@@ -1,6 +1,4 @@
 \chapter{Servidor}
-% Java - REST - JSON - JSOUP 
-
 Com o objetivo de extrair e preparar as informações a serem consumidas pela aplicação móvel do sistema acadêmico Minha Uno, foi desenvolvido em linguagem Java um servidor REST para facilitar e agilizar a extração dos dados. 
 
 Como no questionário apresentado anteriormente obtemos maior quantidade de respostas referentes aos acadêmicos de cursos de graduação, então para este trabalho foi escolhido implementar o servidor e posteriormente a aplicação para este público alvo, sendo implementados os módulos que apresentaram as três melhores notas, sendo eles Material de Apoio, Notas da Graduação e Horários do Semestre.
@@ -26,36 +24,12 @@ Com o objetivo de validar se o login fornecido pelo usuário na aplicação é v
 
 Utilizando-se do método POST do HTTP, os dados de login são enviados utilizando o endereço \url{https://www.unochapeco.edu.br/usuarios/login?login_submited=1&usuario=USUARIO&senha=SENHA&submit=entrar} (as palavras USUARIO e SENHA devem ser substituidas pelas respectivas informações).
 
-\begin{algorithm}
-\caption{Algoritmo para Validação do Login e Captura da Sessão}
-\label{alg:frw}
-\algsetup{indent=3em, linenodelimiter=.}
-\begin{algorithmic}[1]
-\REQUIRE Login e Senha do Usuário
-\ENSURE Resultado se as informações de login são válidas e Cookie de Sessão
 
-\STATE var $session$
-\STATE var $loginValido$
-
-\STATE var $retornoServidor \gets Resultado da Consulta ao Servidor Minha Uno$
-\STATE $sessao \gets retornoServidor.cookie("PHPSESSID")$
-\IF{$retornoServidor = InformacaoValidaDeLogin$}
-    \STATE $loginValido \gets VERDADEIRO$
-\ELSE
-   \STATE $loginValido \gets FALSO$
-\ENDIF
-
-\RETURN loginValido
-\end{algorithmic}
-\end{algorithm}
-
-O algoritmo de extração do cookie e validação do login não apresenta nenhuma complexidade, conforme pode-se observar no Algoritmo 1. Para a exemplificação dos algoritmos neste capítulo não será adicionado código fonte em java, exibindo-se trechos de pseudo-código com relevância para este trabalho.
+O algoritmo de extração do cookie e validação do login não apresenta nenhuma complexidade, conforme pode-se observar no Apendice A.1 deste trabalho.
 
 %%% Aqui é a sessão de extração do material de apoio
 \subsection{Material de Apoio}
 Com o objetivo de extrair a relação dos materiais eletrônicos postados pelos professores em cada disciplina cursada pelo acadêmico. Para melhor entendimento, o algoritmo será dividido em duas partes, sendo que a primeira parte mostrará como são extraidas as informações referentes as disciplinas cursadas pelo acadêmico, e a segunda parte do como são extraidas as informações dos materiais disponíveis.
-
-%O Algoritmo 2 mostra como as informações dos materiais de apoio são extraidas, e o mesmo será detalhado nos itens 5.2.2.1 e 5.2.2.2 deste trabalho.
 
 %%% Aqui é a subsubsessão de extração das disciplinas
 \subsubsection{Extração das Disciplinas}
@@ -108,8 +82,6 @@ Para obtermos a descrição dos materiais postados, a expressão ``\emph{form tr
      \includegraphics[scale=0.6]{imagens/listamateriaisdisciplinasdescricao.png}
      \\  Fonte: Do Autor.
 \end{figure}
-
-\newpage
 
 \subsection{Notas da Graduação}
 Com o objetivo de de extrair as avaliações e as respectivas notas das avaliações aplicadas aos acadêmicos, foi desenvolvida a classe de extração das notas da graduação. Para melhor entendimento, o algoritmo será dividido em três partes, onde a primeira representará a extração da lista de disciplinas cursadas pelos acadêmicos, a segunda as informações referentes as avaliações e notas das disciplinas em aberto e a terceira parte explicará a extração das disciplinas já finalizadas pelo acadêmico.
@@ -246,9 +218,9 @@ Como última parte da extração das informações, falaremos da Extração dos 
      \\  Fonte: Do Autor.
 \end{figure}
 
-\newpage
+%\newpage
 
-A partir do retorno da expressão demonstrado na Figura 11, são aplicadas novas expressões para obter-se as informações específicas necessárias, sendo estas expressões mostradas na Tabela X.
+A partir do retorno da expressão demonstrado na Figura 11, são aplicadas novas expressões para obter-se as informações específicas necessárias, sendo estas expressões mostradas na Tabela 11.
 
 \begin{table}[!hbt]
 \centering
@@ -293,7 +265,6 @@ info               & Neste campo é passado o tipo de informação que deseja se
 \\ Fonte: elaboração do autor.
 \end{table}
 
-\newpage
 O parâmetro \emph{info} presente na Tabela 12 merece uma atenção especial, pois o mesmo não é obrigatório. Caso o mesmo seja omitido da URL de conexão com o servidor, teremos como retorno um valor booleano informando se o login é válido. Nesta implementação do servidor, são três as possíveis opções para o parâmetro \emph{info}: materiais, notas e horarios. Cada uma das opções refere-se a um dos módulos do sistema acadêmico extraidos anteriormente.
 
 O acesso ao servidor ocorre por meio de requisições HTTP na porta 90. Por exemplo, caso se deseje se obter as informações do material de apoio de determinado acadêmico com o nome de usuário \emph{teste} e a senha \emph{teste}, e o servidor estivesse rodando localmente na máquina utilizada para consulta, bastaria utilizar a URL \url{http://localhost:90?usuario=teste&senha=teste&info=materiais}, sendo assim o servidor encarregado de validar o login e retornar as informações corretas referentes aos materiais de apoio do acadêmico.
