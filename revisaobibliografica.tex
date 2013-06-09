@@ -24,26 +24,52 @@ Lançado pela Microsoft em 2010, como sucessor do Windows Mobile, o Windows Phon
 \subsection{Web service}
 Web service é um sistema de software que permite a comunicação entre diversos softwares por meio de mensagens SOAP, normalmente utilizando o Protocolo de transferência de Hipertexto (HTTP) para transmitir arquivos de dados entre as aplicações \cite{W3C}.
 \subsubsection{REST}
-A arquitetura de Transferência de Estado Representativo (do inglês \emph{Representational State Transfer}, também identificado como REST) é uma técnica da engenharia de software que define uma interface uniforme de conexão. O REST é um estilo híbrido, baseado em muitos protocolos baseados em rede (como Protocolo Cliente-Servidor, Protocolo de Sistemas em Camadas, Protocolo de Sessão Remota, etc.) \cite{RESTFielding}.
+A arquitetura de Transferência de Estado Representativo (do inglês \emph{REpresentational State Transfer}, também identificado como REST) é uma técnica da engenharia de software que define uma interface uniforme de conexão. O REST é um estilo híbrido, baseado em muitos protocolos baseados em rede (como Protocolo Cliente-Servidor, Protocolo de Sistemas em Camadas, Protocolo de Sessão Remota, etc.) \cite{RESTFielding}.
 
+A arquitetura REST funciona com o conceito Cliente-Servidor, onde as informações são disponibilizadas em um servidor, que responde de forma padronizada as requisições de informações, retornando com um mesmo layout os dados retornados. Isto permite que várias aplicações venham a consumir informações do mesmo servidor, porém mostrem estas informações de diferentes formas, já que o servidor REST não retorna componentes gráficos, apenas texto em algum padrão definido (exemplo XML, JSON, Texto delimitado por caractere) \cite{RESTFielding}.
 
+Um servidor REST é um servidor sem estado, ou seja, as informações retornadas pelo servidor não são armazenadas no mesmo. Desta forma a visibilidade, confiabilidade e escalabilidade do servidor são melhoradas. A melhoria da visibilidade ocorre pois o servidor não precisa olhar para outros estados em busca de dados, olhando apenas a requisição feita para o mesmo e retornando as informações referentes a ela. Já a confiabilidade melhora pois por ser sem estado o servidor consegue recuperar-se de falhas parciais de forma automática, onde ao se repetir a requisição o erro ocorrido anteriormente não influencia uma nova consulta. Já a escalabilidade é melhorada pois os recursos alocados no servidor para cada consulta são desalocados rápidamente após o termino da mesma, não mantendo nenhuma informação daquela consulta em memória temporária ou permanente. A desvantagem de ser uma arquitetura sem estado é que requisições repetitivas de informações sempre serão buscadas na fonte dos dados, podendo gerar sobrecarga na rede ou em servidores para tratamento destas requisições.\cite{RESTFielding}.
 
-%\url{http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm}
+Além disso um servidor REST tem como uma das suas principais características a padronização na disponibilização das informações, onde aplicando-se os conceitos da engenharia de software de generalização é possível obter de diferentes servidores REST que possuem como base o mesmo tipo de retorno informações diferentes sem alterar-se a forma de obtenção das informações. Desta forma uma vez desenvolvido o servidor, o consumo das informações ocorre de forma rápida e simples pela aplicação, por seguir um padrão já conhecido de retorno. Este padrão de retorno, conforme comentado anteriormente, não ocorre de forma estática, e é desenvolvido pela implementação do servidor \cite{RESTFielding}.
 
 \section{JavaScript}
-\url{https://developer.mozilla.org/en-US/docs/Web/JavaScript?redirectlocale=en-US&redirectslug=JavaScript}
+Apesar do nome possuir a palavra \emph{Java}, o JavaScript não possui ligação nenhuma com esta linguagem de desenvolvimento, sendo o nome escolhido desta forma apenas para causar a confusão e a curiosidade dos desenvolvedores. O JavaScript é uma linguagem de programação dinâmica e orientada a objetos para propósitos gerais, sendo seu principal uso no desenvovimento de scipts para a internet. Atualmente qualquer computador possui um interpretador JavaScript instalado, seja ele integrado ao navegador web ou uma aplicação externa \cite{JavaScriptCrockford}.
+
+O JavaScript foi desenvolvido inicialmente pela Netscape com o nome de LiveScript, porém o nome nõa era confuso o suficiente, sendo alterado para JavaScript posteriormente. A sintaxe das aplicações desenvolvidas em JavaScript lembram de uma aplicação desenvolvida em Java, e consequentemente de uma aplicação desenvolvida em C, porém o JavaScript não possui estruturas de tipos, e apesar de suportar orientação a objetos também não possui classes, o que também mostra que não possuí herança por classes, porém possui herança orientada a protótipos \cite{JavaScriptCrockford}.
+
+O fato de o JavaScript ser uma linguagem com uma curva de aprendizado suave faz com que ele seja utilizado em meio acadêmico para aprendizagem, o que faz com que a linguagem seja conhecida pela sua simplicidade, não pelo seu potencial. Além disso a especificação da linguagem feita pela \emph{ECMA} (Europea Computer Manufactures Association) de uma qualidade muito baixa e de dificil leitura auxiliou no mal entendimento do funcionamento e das especificações da linguagem. Unindo este fato a livros escritos por pessoas que não conhecem a fundo a linguagem e assim demonstram exemplos que não seguem as melhores práticas de desenvolvimento, gera-se um mito de que o JavaScript é uma linguagem desorganizada e que não existe um padrão.\cite{JavaScriptCrockford}.
+
 \subsection{JSON}
-\url{http://www.json.org/json-pt.html}
+Baseando-se em um subconjunto da linguagem JavaScript, o JSON (Notação de Objetos JavaScript, do inglês JavaScript Object Notation) é um formato leve para troca de dados. Sendo completamente independente da linguagem JavaScript, apenas apresentando similaridades com a mesma, é um formato familiar a maioria das linguagens de programação modernas, sendo assim considerado o formato ideal para troca de dados. O JSON representa basicamente dois tipos de estruturas de dados, objetos e vetores.\cite{JSON}.
+
+Os objetos são representados entre chaves (iniciando em \{ e terminando em \}) e representando os atributos no formato chave-valor, onde a chave obrigatóriamente apresenta-se entre aspas (") e é separada do valor por dois-pontos (:). Os valores podem ser do tipo vetor, objeto, booleano, nulo, texto e número. Todos os atributos de um objeto são separados por vírgula (,), sendo que o último atributo da classe não leva vírgula antes do fechamento das chaves. Um exemplo de objeto JSON é pode ser visto na Figura 1 \cite{JSON}.
+
+\begin{figure}[!htb]
+     \centering
+     \caption{Exemplo de Objeto JSON}
+     \includegraphics[scale=1]{imagens/exemplojson.png}
+     \\ Fonte: \cite{JSONLint}.
+\end{figure}
+
+Na Figura 1 também é exibido um vetor, representado pelo atributo \emph{sub1} do objeto \emph{sub}. Como pode-se ver, um vetor tem como característica estar entre colchetes (iniciando em [ e terminando em ]), e seus objetos ou valores separados por vírgula (,), exceto o último valor antes dos colchetes serem fechados \cite{JSON}.
 
 \section{Java}
-\url{http://www.java.com/pt_BR/download/whatis_java.jsp}
+
+Criado por James Gosling a partir de um projeto de pesquisa da Sun Microsystem em 1991, chamado inicialmente de Oak e posteriormente renomeado para Java pois o nome Oak já pertencia a uma linguagem de programação.\cite{java_deitel}.
+
+Baseada na linguagem C++ e orientada a objetos, foi criada para ser utilizada em dispositivos eletrônicos, porém com a expansão da \emph{Web} a Sun viu o potencial de utilizar o Java para adicionar conteúdo dinâmico as páginas \emph{Web}. A linguagem foi anunciada oficialmente em 1995 em uma feira do setor \cite{java_deitel}.
 
 \section{SQLite}
-\url{http://www.sqlite.org/}
+O SQLite é uma biblioteca de código fonte livre compilada juntamente com a aplicação que implementa um controlador de base de dados SQL para uso geral. Por funcionar embutida na aplicação, não necessita de um servidor ou configurações para funcionar, bastando definir o nome do arquivo da base e a biblioteca se encarrega dos controles necessários \cite{SQLite}.
 
-\section{Jsoup}
-\url{https://github.com/jhy/jsoup/blob/master/README}
-\\ \url{http://jsoup.org/}
+Apesar de todas as funcionalidades fornecidas pelo SQLite, como a possibilidade de execução de consutas SQL, gerenciamento de transações e múltiplas tabelas, indices e gatilhos, o SQLite é econômico em termos de memória utilizada, sendo sua utilização recomendada em dispositivos com pouco espaço de armazenamento ou memória ram, como celulares, players mp3 entre outros. Mesmo neste tipo de ambientes, o SQLite apresenta um bom desempenho \cite{SQLite}.
+
+\section{jsoup}
+O jsoup é uma biblioteca para a linguagem java que fornece uma API para extração e manipulação de dados a partir de código HTML utilizando o melhor do DOM, CSS e métodos jquery para extrair as informações \cite{JSOUP}.
+
+O jsoup permite a extração das informações acessando o código HTML a partir de uma URL, um arquivo ou de um texto, sendo que para a busca e extração das informações podem ser utilizados DOM ou seletores CSS. Além disso o jsoup permite manipular os elementos, atributos e textos dos códitos HTML \cite{JSOUP}.
+
+O jsoup foi desenvolvido para permitir a extração dos mais diferentes formatos de código HTML disponíveis, validando o HTML de entrada e criando uma árvore informações \cite{JSOUP}.
 
 \section{Ferramentas de Desenvolvimento Multiplataforma para Dispositivos Móveis}
 Um dos grandes desafios para os desenvolvedores de software é encontrar qual ferramenta atende as necessidades da aplicação a ser desenvolvida. Isso fica ainda mais perceptível quando a aplicação deve ser executada em dispositivos móveis, devido a diversidade de sistemas operacionais a serem atendidos. Hoje existem 4 sistemas operacionais para dispositivos móveis que detém grande parte do mercado, sendo eles Android, iOS, Windows Phone e Symbian, sendo o Android e o iOS detentores da maior fatia do mercado. Ao se deparar com este cenário, desenvolvedores se perguntam qual tipo de ferramenta permite que eles desenvolvam apenas uma vez a aplicação, e que a mesma rode de forma satisfatória em todos os dispositivos. Abaixo será visto as 3 principais técnicas de desenvolvimento multiplataforma para dispositivos móveis\cite{CrossPlatformMobileDevelopment2011}.
