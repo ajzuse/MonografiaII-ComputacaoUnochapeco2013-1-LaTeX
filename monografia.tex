@@ -29,6 +29,9 @@
 \usepackage{times}
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
+\usepackage{listings}
+\usepackage{listings-ext}
+\usepackage{listingsutf8}
 
 \begin{document}
 
@@ -95,9 +98,6 @@
 \addcontentsline{toc}{chapter}{LISTA DE TABELAS}
 \listoftables
 
-%\addcontentsline{toc}{chapter}{LISTA DE SIGLAS}
-%\listadesiglas
-
 % ------------------------------------------------------------ %
 % Altera o título do Sumário                                   %
 % ------------------------------------------------------------ %
@@ -121,4 +121,9 @@
 \include{conclusao}
 
 \bibliography{bibliografia}
+
+\include{CodigoFonteServidor}
+\include{codigofonteaplicacao}
+\include{CodigoFonteServidorRest}
+
 \end{document}
