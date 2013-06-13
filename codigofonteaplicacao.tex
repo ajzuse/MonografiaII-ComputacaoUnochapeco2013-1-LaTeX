@@ -1,4 +1,4 @@
-\chapter*{APÊNDICE B}
+\chapter{Aplicativo}
 
 \lstdefinelanguage{JavaScript}{
   keywords={break, case, catch, continue, debugger, default, delete, do, else, finally, for, function, if, in, instanceof, new, return, switch, this, throw, try, typeof, var, void, while, with},
@@ -20,7 +20,7 @@
   }
 
 
-\section*{1. conexao.js}
+\section{conexao.js}
 \begin{lstlisting}
 var ConexaoServidor = function(_Usuario, _Senha)
 {
@@ -199,7 +199,7 @@ var ConexaoServidor = function(_Usuario, _Senha)
 };
 \end{lstlisting}
 
-\section*{2. Login.js}
+\section{Login.js}
 \begin{lstlisting}
 Ti.include('Funcoes.js');
 Ti.include('conexao.js');
@@ -340,7 +340,7 @@ function FormLogin()
 }
 \end{lstlisting}
 
-\section*{3. FormPrincipal.js}
+\section{FormPrincipal.js}
 \begin{lstlisting}
 Ti.include('Funcoes.js');
 Ti.include('conexao.js');
@@ -450,7 +450,7 @@ Ti.UI.currentWindow.add(imgUnochapeco);
 Ti.UI.currentWindow.add(tableview)
 \end{lstlisting}
 
-\section*{4. FormConsultaMaterial.js}
+\section{FormConsultaMaterial.js}
 \begin{lstlisting}
 Ti.include('Funcoes.js');
 Ti.include('FormConsultaMaterialDisciplina.js');
@@ -524,7 +524,7 @@ formConsultaMaterial.add(tvDisciplinasApoio);
 formConsultaMaterial.open();
 \end{lstlisting}
 
-\section*{5. FormConsultaMaterialDisciplina.js}
+\section{FormConsultaMaterialDisciplina.js}
 \begin{lstlisting}
 function FormConsultaMaterialDisciplina(_NomeDisciplina)
 {
@@ -621,7 +621,7 @@ function FormConsultaMaterialDisciplina(_NomeDisciplina)
 };
 \end{lstlisting}
 
-\section*{6. FormConsultaNota.js}
+\section{FormConsultaNota.js}
 \begin{lstlisting}
 Ti.include('Funcoes.js');
 Ti.include('FormConsultaNotaDetalhe.js');
@@ -740,7 +740,7 @@ formConsultaNotas.add(tvDisciplinasApoio);
 formConsultaNotas.open();
 \end{lstlisting}
 
-\section*{7. FormConsultaNotaDetalhe.js}
+\section{FormConsultaNotaDetalhe.js}
 \begin{lstlisting}
 function FormConsultaNotaDetalhe()
 {
@@ -841,7 +841,7 @@ function FormConsultaNotaDetalhe()
 
 \end{lstlisting}
 
-\section*{9. FormConsultaHorarioSemestre.js}
+\section{FormConsultaHorarioSemestre.js}
 \begin{lstlisting}
 Ti.include('Funcoes.js');
 Ti.include('FormConsultaHorarioDetalhe.js');
@@ -946,7 +946,7 @@ formHorariosSemestre.add(tvHorariosSemestre);
 formHorariosSemestre.open();
 \end{lstlisting}
 
-\section*{10. FormConsultaHorarioDetalhe.js}
+\section{FormConsultaHorarioDetalhe.js}
 \begin{lstlisting}
 function FormConsultaHorarioDetalhe(_CodigoDisciplina) {
     this.create = function () {
@@ -1027,7 +1027,7 @@ function FormConsultaHorarioDetalhe(_CodigoDisciplina) {
 }
 \end{lstlisting}
 
-\section*{11. Funcoes.js}
+\section{Funcoes.js}
 \begin{lstlisting}
 function pegarLarguraTela()
 {
@@ -1064,7 +1064,7 @@ function msgBox(Titulo, Mensagem)
 }
 \end{lstlisting}
 
-\section*{12. app.js}
+\section{app.js}
 \begin{lstlisting}
 // this sets the background color of the master UIView (when there are no windows/tab groups on it)
 Ti.include('FormLogin.js');
