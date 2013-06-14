@@ -15,6 +15,7 @@
     literate={á}{{\'a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {Ã}{{\~A}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {â}{{\^a}}1 {í}{{\'i}}1
 }
 
+Neste capítulo é apresentada a implementação do Icebreak REST Server. A implementação apresentada é similar a original, porém houve a necessidade de ser removido o tamanho do arquivo retornado no cabeçalho do HTML, o que pode ser visto na função \emph{sendResponse}. Foi destacada nesta função a linha comentada.
 
 \begin{lstlisting}
 /*                                                                                          */
@@ -330,6 +331,8 @@ public class RestServer {
              "Accept-Encoding: multipart/form-data\r\n" +
              "Server: IceBreak Java Services\r\n" +
              "cache-control: no-store\r\n" +
+             // LINHA COMENTADA POIS OCASIONAVA UM PROBLEMA DE FALTA DE 
+             // DADOS NO JSON DE RETORNO
              //"Content-Length: " + Integer.toString(resp.length()) + "\r\n" +
              "Content-Type: " + ContentType + "\r\n" +
              "\r\n" + resp.toString());
