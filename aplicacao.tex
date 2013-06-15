@@ -6,7 +6,7 @@ Tendo como base o questionário apresentado anteriormente onde obtemos maior qua
 
 Para o desenvolvimento da aplicação, foi utilizado exclusivamente a ferramenta de desenvolvimento \emph{Titanium SDK} desenvolvida pela \emph{Appcelerator Inc.} devido ao fato de a mesma ser gratuita e utilizar uma linguagem com curva de aprendizado suave. Além disso o fato de utilizar a mesma e desenvolver em JavaScript utilizando ela facilitou a comunicação com o servidor e a extração dos arquivos JSON retornados por ele. Além disso, utilizando-se o \emph{Titanium SDK} para o desenvolvimento, é possível compilar com o mesmo código fonte aplicações para Android e iOS, plataformas mais utilizadas pelos acadêmicos da instituição. Apesar de ser fortemente lembrados os padrões, nem todo o sistema foi desenvolvido utilizando-se os conceitos de orientação a objetos, sendo utilizadas tanto técnicas de programação estruturada como orientação a objetos conforme a técnica que melhor atendia o desenvolvimento do módulo em específico.
 
-Todas as informações extraidas do servidor são inseridas em uma base de dados SQLite no próprio dispositivo, possibilitando assim a consulta offline das informações.
+Todas as informações extraidas do servidor são inseridas em uma base de dados SQLite no próprio dispositivo, possibilitando assim a consulta offline das informações. A sincronização com o servidor pode ser feita utilizando-se de rede sem fio na forma de wireless ou utilizando-se de rede de telefonia celular, não havendo restrição na forma de sincronização dos dados.
 
 Para facilitar e modularizar este capítulo, as informações referentes a cada módulo foram separadas em sessões que serão apresentadas a seguir.
 
@@ -287,4 +287,35 @@ Conforme pode ser visto na Figura 26, o último registro é exibido em destaque.
 A implementação dos formulários de exibição das disciplinas e dos horários podem ser consultados nos Apêndices \emph{B.8} e \emph{B.9}.
 
 \section{Execução no Google Android}
+Conforme resultados obtidos no questionário, a maior parte dos acadêmicos que responderam o mesmo que possuem dispositivos móveis possuem o sistema operacional Android nos seus dispositivos. Apesar deste capítulo ter exibido, até o momento, apenas imagens do funcionamento da aplicação no sistema operacional iOS, a aplicação, sem nenhuma alteração em sua implementação, é executada também em dispositivos com o sistema operacional Android.
 
+Conforme podem ser vistos nas Figuras \ref{fig:LoginAndroid}, \ref{fig:MenuPrincipalAndroid} e \ref{fig:DetalhesDisciplina} as informações são exibidas apenas com um visual diferente, devido ao Titanium SDK gerar componentes gráficos nativos para a plataforma de destino.
+
+\begin{figure}[!htb]
+     \centering
+     \caption[Formulário de Login - Google Android]{Visualização do Formulário de Login no Google Android.}
+     \includegraphics[scale=0.22]{imagens/loginandroid.png}
+     \label{fig:LoginAndroid}
+     \\  Fonte: Do Autor.
+\end{figure}
+
+\begin{figure}[!htb]
+     \centering
+     \caption[Formulário Principal - Google Android]{Visualização do Formulário Principal no Google Android.}
+     \includegraphics[scale=0.22]{imagens/menuprincipalandroid.png}
+     \label{fig:MenuPrincipalAndroid}
+     \\  Fonte: Do Autor.
+\end{figure}
+
+\begin{figure}[!htb]
+     \centering
+     \caption[Formulário Horários do Semestre - Google Android]{Visualização dos detalhes da disciplina selecionada no Google Android.}
+     \includegraphics[scale=0.22]{imagens/detalhesdisciplinaandroid.png}
+     \label{fig:DetalhesDisciplina}
+     \\  Fonte: Do Autor.
+\end{figure}
+
+\newpage
+
+\section{Testes da aplicação}
+Devido a complexidade do desenvolvimento do servidor por não se possuir acesso direto aos dados dos acadêmicos da instituição, houve um atraso no desenvolvimento do projeto, o que não tornou possível o envio da aplicação para testes pelos acadêmicos que, no questionário, informaram que desejariam testar a aplicação. Para testes foram utilizados um dispositivo com iOS e dois dispositivos com Android, para assim verificar o comportamento da aplicação.
