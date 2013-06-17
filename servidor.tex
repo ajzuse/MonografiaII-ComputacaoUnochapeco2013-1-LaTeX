@@ -22,7 +22,7 @@ Como toda a extração é baseada no retorno do código HTML do sistema atual, q
 \subsection{Login}
 Com o objetivo de validar se o login fornecido pelo usuário na aplicação é válido e extrair o cookie (identificador de sessão utilizado para as acesso as informações obtidas apenas pelo login válido do usuário), o servidor possuí como primeira tarefa ao receber uma solicitação da aplicação a validação de login.
 
-Utilizando-se do método POST do HTTP, os dados de login são enviados utilizando o endereço \url{https://www.unochapeco.edu.br/usuarios/login?login_submited=1&usuario=USUARIO&senha=SENHA&submit=entrar} (as palavras USUARIO e SENHA devem ser substituidas pelas respectivas informações).
+Utilizando-se do método POST do HTTP, os dados de login são enviados utilizando o endereço \url{https://www.unochapeco.edu.br/usuarios/login?login_submit} \\ \url{ed=1&usuario=USUARIO&senha=SENHA&submit=entrar} (as palavras USUARIO e SENHA devem ser substituidas pelas respectivas informações).
 
 
 O algoritmo de extração do cookie e validação do login não apresenta nenhuma complexidade, conforme pode-se observar no Apêndice A.1 deste trabalho.
@@ -33,7 +33,7 @@ Com o objetivo de extrair a relação dos materiais eletrônicos postados pelos 
 
 %%% Aqui é a subsubsessão de extração das disciplinas
 \subsubsection{Extração das Disciplinas}
-Com o objetivo de extrair a lista das disciplinas pertencentes ao módulo de material de apoio do sistema acadêmico, é necessário que a informação seja extraida a partir do código HTML retornado pela url \url{https://www.unochapeco.edu.br/saa/materialApoio.php}. Para a obtenção das disciplinas corretas cursadas pelo acadêmico, é utilizado o cookie de sessão capturado no momento do login, conforme explicado no item 5.2.1 deste trabalho. Um exemplo de código HTML retornado pelo servidor a partir deste tipo de consulta pode ser visto na url \url{http://goo.gl/fLo0h}.
+Com o objetivo de extrair a lista das disciplinas pertencentes ao módulo de material de apoio do sistema acadêmico, é necessário que a informação seja extraida a partir do código HTML retornado pela url \url{https://www.unochapeco.edu.br/saa/materialApoi} \\ \url{o.php}. Para a obtenção das disciplinas corretas cursadas pelo acadêmico, é utilizado o cookie de sessão capturado no momento do login, conforme explicado no item 5.2.1 deste trabalho. Um exemplo de código HTML retornado pelo servidor a partir deste tipo de consulta pode ser visto na url \url{http://goo.gl/fLo0h}.
 
 A partir do código HTML retornado, sendo aplicanda a expressão ``\emph{form tr td:eq(1) a}'' sob o mesmo por meio da biblioteca \emph{jsoup}, obtém-se como retorno a lista das disciplinas cursadas pelo acadêmico, conforme pode ser visto na figura 6.
 
@@ -74,7 +74,7 @@ Para obtermos a publicação, que nada mais é o nome do professor que postou o 
      \\  Fonte: Do Autor.
 \end{figure}
 
-Para obtermos a descrição dos materiais postados, a expressão ``\emph{form tr:contains(Descrição) td:eq(1)}'' onde obtém-se como resultado a lista da descrições dos materiais, confome pode ser visto na Figura 9.
+Para obtermos a descrição dos materiais postados, a expressão ``\emph{form tr:contains\\(Descrição) td:eq(1)}'' onde obtém-se como resultado a lista da descrições dos materiais, confome pode ser visto na Figura 9.
 
 \begin{figure}[!htb]
      \centering
