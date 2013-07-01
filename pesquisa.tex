@@ -69,7 +69,7 @@ O desvio-padrão amostral corrigido é calculado por meio da fórmula
 Que apresenta parâmetros semelhantes aos utilizados na fórmula utilizada no cálculo da distri- \\ buição t de Student, com o acréscimo do $X_i$ que representa o valor observado para o indivíduo $i$ da amostra
 \cite{DistroStudent}.
 
-Aplicando-se as fórmulas acima a tabela 1, foram obtidos os valores apresentados na tabela 2.
+Aplicando-se a fórmula da distribuição t de Student a tabela 1, foram obtidos os valores apresentados na tabela 2.
 
 \begin{table}[!hbt]
 \centering
@@ -90,11 +90,12 @@ Situação Financeira & 4,24 & 0,903 & 22,899 & 99,99 \\ \hline
 \\ Fonte: elaboração do autor.
 \end{table}
 
-O cálculo do índice de confiança pode ser reproduzido utilizando-se da função INVT (ou similar) do editor de planilhas eletrônicas, sendo que os percentuais apresentados no índice de confiança foram arredondados para duas casas decimais para permitir melhor interpretação do mesmos. 
+O cálculo do índice de confiança pode ser reproduzido utilizando-se da função INVT (ou similar) do editor de planilhas eletrônicas, sendo que os percentuais apresentados no índice de confiança foram arredondados para duas casas decimais para permitir melhor interpretação dos mesmos. 
+
 Devido a utilização da  distribuição t de Student na forma bicaudal, nos casos onde o valor $t$ apresentou-se negativo, o índice de confiança representa o percentual de chances de a resposta ficar abaixo da média em pesquisas feitas posteriormente, enquanto em itens onde o valor $t$ apresentou-se positivo, o percentual de confiança demonstra as chances de em pesquisas posteriores os valores ficarem acima da média.
 
 \subsection{Pós-Graduação}
-Esta parte do questionário foi destinada apenas para estudantes de cursos de Pós-Graduação, onde o pós-graduando deu notas de 1 a 5 para cada item disponível no sistema acadêmico atual, utilizando-se da escala de Likert, onde  a nota 1 demonstra que o item menos importante para o acadêmico, e a nota 5 representa que o item é importantíssimo.
+Esta parte do questionário foi destinada apenas para estudantes de cursos de Pós-Graduação, onde o pós-graduando deu notas de 1 a 5 para cada item disponível no sistema acadêmico atual, utilizando-se da escala de Likert, onde  a nota 1 demonstra que o item menos importante para o pós-graduando, e a nota 5 representa que o item é importantíssimo.
 
 Na tabela 3 serão representadas as perguntas efetuadas e a média final das respostas. Esta parte da pesquisa contou com 1 resposta, não sendo assim possível extrair informações conclusivas sobre este perfil do sistema acadêmico.
 
@@ -118,7 +119,7 @@ Situação Financeira & 5,00 \\ \hline
 Devido a possuir apenas uma resposta, não foi efetuada avaliação de Student sobre este item para medir o índice de confiança da resposta obtida, pois o tamanho da amostra pode ser considerada insignificante para a tomada de decisões.
 
 \subsection{Professor}
-Esta parte do questionário foi destinada apenas para o corpo docente da instituição onde o professor deu notas de 1 a 5 para cada item disponível no sistema acadêmico atual, utilizando-se da escala de Likert, onde  a nota 1 demonstra que o item menos importante para o acadêmico, e a nota 5 representa que o item é importantíssimo.
+Esta parte do questionário foi destinada apenas para o corpo docente da instituição onde o professor deu notas de 1 a 5 para cada item disponível no sistema acadêmico atual, utilizando-se da escala de Likert, onde  a nota 1 demonstra que o item menos importante para o professor, e a nota 5 representa que o item é importantíssimo.
 
 Na tabela 4 serão representadas as perguntas efetuadas e a média final das respostas. Esta parte da pesquisa contou com 2 respostas, não sendo assim possível extrair informações conclusivas sobre este perfil do sistema acadêmico.
 
@@ -160,7 +161,7 @@ Devido a possuir apenas duas respostas, não foi efetuada avaliação de Student
 %\newpage
 
 \subsection{Funcionário}
-Esta parte do questionário foi destinada apenas para os funcionários da instituição onde o funcionário deu notas de 1 a 5 para cada item disponível no sistema acadêmico atual, utilizando-se da escala de Likert, onde  a nota 1 demonstra que o item menos importante para o acadêmico, e a nota 5 representa que o item é importantíssimo.
+Esta parte do questionário foi destinada apenas para os funcionários da instituição onde o funcionário deu notas de 1 a 5 para cada item disponível no sistema acadêmico atual, utilizando-se da escala de Likert, onde  a nota 1 demonstra que o item menos importante para o funcionário, e a nota 5 representa que o item é importantíssimo.
 
 Na tabela 5 serão representadas as perguntas efetuadas e a média final das respostas. Esta parte da pesquisa contou com 17 respostas.
 
@@ -224,4 +225,4 @@ Conclui-se que para a implementação do aplicativo para dispositivos móveis, d
 Contando apenas com duas perguntas, a etapa final do questionário teve como objetivos levantar interessados em auxiliar nos testes da aplicação, e obter o contato das pessoas interessadas. Tendo como base os pesquisados que possuem smartphone ou tablet, 99,21\% demonstraram interesse em auxiliar nos testes da nova aplicação.
 
 \section{Implementação}
-Com base nos dados apresentados neste capítulo, optou-se em serem implementado apenas o perfil dos alunos de graduação, devido ao número de respostas trazer informações mais confiáveis sobre as opções mais utilizadas pelos acadêmicos. Além disso, devido a forma de extração das informações ocorrer de forma manual e depender do layout da página do sistema acadêmico atual, foi optado por implementar os três módulos com melhores médias (Material de Apoio/Planos de Ension, Notas da Graduação e Horários do Semestre), para demonstrar a possibilidade da extração e também possuir informações reais para a aplicação móvel, extraidas diretamente do Sistema Acadêmico Minha Uno.
+Com base nos dados apresentados neste capítulo, optou-se em implementar apenas o perfil dos alunos de graduação, devido ao número de respostas trazer informações mais confiáveis sobre as opções mais utilizadas pelos acadêmicos. Além disso, devido a forma de extração das informações ocorrer de forma manual e depender do layout da página do sistema acadêmico atual, foi optado por implementar os três módulos com melhores médias (Material de Apoio/Planos de Ensino, Notas da Graduação e Horários do Semestre), para demonstrar a possibilidade da extração e também possuir informações reais para a aplicação móvel, extraidas diretamente do Sistema Acadêmico Minha Uno.

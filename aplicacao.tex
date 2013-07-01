@@ -1,8 +1,6 @@
 \chapter{Aplicação}
 
-% Referencias - SQLite, JSON, APPCELERATOR TITANIUM, JavaScript, SQL
-
-Tendo como base o questionário apresentado anteriormente onde obtemos maior quantidade de respostas referentes aos acadêmicos de cursos de graduação, foi decidido para este trabalho implementar a aplicação para este público alvo, sendo implementados os módulos que apresentaram as três melhores notas, sendo eles Material de Apoio, Notas da Graduação e Horários do Semestre.
+Tendo como base o questionário apresentado anteriormente onde se obteve maior quantidade de respostas referentes aos acadêmicos de cursos de graduação, foi decidido para este trabalho implementar a aplicação para este público alvo, sendo implementados os módulos que apresentaram as três melhores notas, sendo eles Material de Apoio, Notas da Graduação e Horários do Semestre.
 
 Para o desenvolvimento da aplicação, foi utilizado exclusivamente a ferramenta de desenvolvimento \emph{Titanium SDK} desenvolvida pela \emph{Appcelerator Inc.} devido ao fato de a mesma ser gratuita e utilizar uma linguagem com curva de aprendizado suave. Além disso o fato de utilizar a mesma e desenvolver em JavaScript utilizando ela facilitou a comunicação com o servidor e a extração dos arquivos JSON retornados por ele. Além disso, utilizando-se o \emph{Titanium SDK} para o desenvolvimento, é possível compilar com o mesmo código fonte aplicações para Android e iOS, plataformas mais utilizadas pelos acadêmicos da instituição. Apesar de ser fortemente lembrados os padrões, nem todo o sistema foi desenvolvido utilizando-se os conceitos de orientação a objetos, sendo utilizadas tanto técnicas de programação estruturada como orientação a objetos conforme a técnica que melhor atendia o desenvolvimento do módulo em específico.
 
@@ -133,7 +131,7 @@ nome                   & TEXT                   \\ \hline
 \end{table}
 
 \section{Conexão ao Servidor e Extração dos Dados}
-A conexão com o servidor ocorre conforme explicado no item 5.4 deste trabalho, onde a partir de uma URL utilizando-se de um cliente HTTP para a conexão. Para o sincronismo das aplicações móveis, foi criado um servidor utilizando-se do endereço \url{http://minhaunomovel.no-ip.org}, sendo então necessário utilizar este endereço na montagem da URL de extração das informações. Os passos para conexão e extração dos dados estão representados no \emph{Apêndice B.1}.
+A conexão com o servidor ocorre conforme explicado no item 7.4 deste trabalho, onde a partir de uma URL utilizando-se de um cliente HTTP para a conexão. Para o sincronismo das aplicações móveis, foi criado um servidor utilizando-se do endereço \url{http://minhaunomovel.no-ip.org}, sendo então necessário utilizar este endereço na montagem da URL de extração das informações. Os passos para conexão e extração dos dados estão representados no \emph{Apêndice B.1}.
 
 O processo de conexão com o servidor e de extração de dados ocorrem em conjunto onde a partir da conexão, caso a informação buscada seja retornada é chamada a função de extração de dados, que efetua a conversão do JSON transmitido pelo servidor em um objeto JavaScript, e posteriormente extrai as informações e insere as mesmas na base de dados. 
 
@@ -149,9 +147,9 @@ Sendo o formulário de entrada do sistema, o formulário de login é a ``porta d
      \\  Fonte: Do Autor.
 \end{figure}
 
-Com o objetivo de ser um formulário simples, foi pensado em uma interface limpa, apenas com as informações necessárias. Desta forma o layout a cima foi o escolhido, apenas com os campos de usuário e senha, a logo da instituição e um botão de login.
+Com o objetivo de ser um formulário simples, foi pensado em uma interface limpa, apenas com as informações necessárias. Desta forma o layout na Figura 13 foi o escolhido, apenas com os campos de usuário e senha, a logo da instituição e um botão de login.
 
-Após inseridas as informações, no momento que é acionado o botão de login, a aplica- \\ção conecta-se com o servidor e recebe os dados do acadêmico. Também neste momento as informações de login e senha são armazenadas na tabela de configuração, sendo que exceto quando o usuário efetua logout (opção sair do menu principal da apliçação), o formulário de login não é mais exibido ao usuário, sendo feito o login de forma automática.
+Após inseridas as informações, no momento que é acionado o botão de login, a aplica- \\ção conecta-se com o servidor e recebe os dados do acadêmico. Também neste momento as informações de login e senha são armazenadas na tabela de configuração, sendo que exceto quando o usuário efetua logout (opção sair do menu principal da aplicação), o formulário de login não é mais exibido ao usuário, sendo feito o login de forma automática.
 
 A implementação deste formulário pode ser consultada no \emph{Apêndice B.2}.
 
@@ -201,7 +199,7 @@ Ao ser selecionada alguma disciplina, a lista dos materiais da mesma é exibida.
 \end{figure}
 \newpage
 
-Ao se escolher uma disciplina, o navegador do dispositivo é chamado, para abrir o material escolhido pelo usuário. Neste ponto é solicitado o login do acadêmico no sistema acadêmico pelo browser, pois não possuímos acesso a sessão em que o arquivo foi extraido no servidor. Após o login, material é exibido, conforme Figura 18.
+Ao se escolher uma disciplina, o navegador do dispositivo é chamado, para abrir o material escolhido pelo usuário. Neste ponto é solicitado o login do acadêmico no sistema acadêmico pelo browser, pois não se possui acesso a sessão em que o arquivo foi extraido no servidor. Após o login, material é exibido, conforme Figura 18.
 
 \begin{figure}[!htb]
      \centering
@@ -294,7 +292,7 @@ Conforme podem ser vistos nas Figuras \ref{fig:LoginAndroid}, \ref{fig:MenuPrinc
 \begin{figure}[!htb]
      \centering
      \caption[Formulário de Login - Google Android]{Visualização do Formulário de Login no Google Android.}
-     \includegraphics[scale=0.22]{imagens/loginandroid.png}
+     \fbox{\includegraphics[scale=0.22]{imagens/loginandroid.png}}
      \label{fig:LoginAndroid}
      \\  Fonte: Do Autor.
 \end{figure}
@@ -302,7 +300,7 @@ Conforme podem ser vistos nas Figuras \ref{fig:LoginAndroid}, \ref{fig:MenuPrinc
 \begin{figure}[!htb]
      \centering
      \caption[Formulário Principal - Google Android]{Visualização do Formulário Principal no Google Android.}
-     \includegraphics[scale=0.22]{imagens/menuprincipalandroid.png}
+     \fbox{\includegraphics[scale=0.22]{imagens/menuprincipalandroid.png}}
      \label{fig:MenuPrincipalAndroid}
      \\  Fonte: Do Autor.
 \end{figure}
