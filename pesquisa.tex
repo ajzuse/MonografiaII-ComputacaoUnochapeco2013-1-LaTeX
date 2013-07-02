@@ -51,23 +51,22 @@ Situação Financeira & 4,24 \\ \hline
 \\ Fonte: elaboração do autor.
 \end{table}
 
-Aplicando-se a distribuição t de Student, representada pela fórmula 
-\[
-t=\frac{{\overline{X}} - \mu_0}
-{\frac{S_c}{\sqrt{n}}}
-\]
-onde:\\ 
-- $\overline{X}$ é a média amostral observada; \\
-- $\mu_0$ é a média esperada, sendo esta 3 na pesquisa; \\
-- $S_c$ o desvio padrão amostral corrigido, e; \\
-- $n$ é o tamanho da amostra analisada.
+Aplica-se a distribuição $t$ de Student, representada pela fórmula~\eqref{eq:student}. E o desvio padrão amostral corrigido é calculado por meio da fórmula~\eqref{eq:desvpad}, que apresenta parâmetros semelhantes aos utilizados na fórmula~\eqref{eq:student} com o acréscimo de $X_i$, que representa o valor observado para o indivíduo $i$ da amostra \cite{DistroStudent}.
 
-O desvio-padrão amostral corrigido é calculado por meio da fórmula 
-\[
-   S_c = \sqrt{\frac{1}{n-1} \sum_{i=1}^n(X_i - \overline{X})^2} 
-\]
-Que apresenta parâmetros semelhantes aos utilizados na fórmula utilizada no cálculo da distri- \\ buição t de Student, com o acréscimo do $X_i$ que representa o valor observado para o indivíduo $i$ da amostra
-\cite{DistroStudent}.
+\begin{equation} \label{eq:student}
+t = \frac{\overline{X} - \mu_0}{\frac{S_c}{\sqrt{n}}}
+\end{equation}
+onde: 
+\begin{itemize}
+\item $\overline{X}$ é a média amostral observada;
+\item $\mu_0$ é a média esperada, sendo $\mu_0 = 3$ nesta pesquisa;
+\item $S_c$ é o desvio padrão amostral corrigido; e
+\item $n$ é o tamanho da amostra analisada.
+\end{itemize}
+
+\begin{equation} \label{eq:desvpad}
+S_c = \sqrt{\frac{1}{n - 1} \sum_{i = 1}^{n} (X_i - \overline{X})^2}
+\end{equation}
 
 Aplicando-se a fórmula da distribuição t de Student a tabela 1, foram obtidos os valores apresentados na tabela 2.
 
